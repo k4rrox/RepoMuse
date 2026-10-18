@@ -1,5 +1,3 @@
-<p align="center"><img src="web/mark.svg" width="56" height="56" alt=""></p>
-
 <h1 align="center">RepoMuse</h1>
 
 <p align="center"><strong>あなたのためだけに選ばれた GitHub プロジェクト。どれにも、エージェントが自ら作って試せるデモが付いています。</strong></p>
@@ -90,6 +88,23 @@ Let agents choose a visual direction for web pages, then check and fix it in a r
 **Verified demo** Break "template look" into checkable details, then scan real code. Try it: `python3 -m repomuse demo taste-skill`
 ```
 
+## デモの設定
+
+`repomuse.json` の `demos` で、エージェントがどこまでデモを作るかを決めます。変えたいキーだけを書けば十分です。
+
+```json
+"demos": { "policy": "ask", "scope": "medium", "allow_installs": true, "max_per_run": 1 }
+```
+
+| キー | 値 |
+| --- | --- |
+| `policy` | `auto` 自分から作る · `ask`（既定）提案してから承認を待つ · `off` 作らない |
+| `scope` | `small` 1 ページで 1 機能 · `medium`（既定）複数の操作、パッケージのバンドル可 · `large` より完全なシナリオ、重めのローカルビルド可 |
+| `allow_installs` | `true`（既定）デモのフォルダー内でのパッケージのインストールを許可。`false` はそのまま動くファイルのみ |
+| `max_per_run` | 1 回あたりのデモ数、0〜5（既定 1） |
+
+`attach-demo` は `policy`、`max_per_run`、`allow_installs` を強制し、デモのスキルが各デモを `scope` の範囲に収めます。
+
 ## 仕組み
 
 ```text
@@ -114,7 +129,7 @@ profile.md + フィードバック ──▶ エージェントが repomuse-run 
 | ファイル | 書き込む人 | 内容 |
 | --- | --- | --- |
 | `profile.md` | あなたとエージェント | 見たいもの、見たくないもの、エージェントが気づいた好み |
-| `repomuse.json` | セットアップ | タイトル、モード（`ui` / `no-ui`）、言語、タイムゾーン、周期、1 回あたりの件数、トピック、ポート |
+| `repomuse.json` | セットアップ | タイトル、モード（`ui` / `no-ui`）、言語、タイムゾーン、周期、1 回あたりの件数、トピック、ポート、デモの設定 |
 | `data/editions.json` | `publish` | すべての回 |
 | `data/feedback.json` | ページまたは `vote` | あなたの「役に立った / 興味なし」 |
 | `demos/<slug>/` | エージェント | 作成したデモ |

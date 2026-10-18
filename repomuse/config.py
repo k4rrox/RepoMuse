@@ -13,6 +13,11 @@ MODES = ("ui", "no-ui")
 LANGUAGE = re.compile(r"[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*")
 SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 
+DEMO_POLICIES = ("auto", "ask", "off")
+DEMO_SCOPES = ("small", "medium", "large")
+# How far the agent may go when it builds demos. Partial objects in repomuse.json are merged over these.
+DEMO_DEFAULTS = {"policy": "ask", "scope": "medium", "allow_installs": True, "max_per_run": 1}
+
 # One broad topic out of the box; setup replaces it with the user's own areas.
 DEFAULT_TOPICS = [{"id": "ai", "label": "AI"}]
 DEFAULTS = {
@@ -24,6 +29,7 @@ DEFAULTS = {
     "picks_per_run": {"min": 0, "max": 3},
     "port": 53265,
     "topics": DEFAULT_TOPICS,
+    "demos": DEMO_DEFAULTS,
 }
 
 
@@ -58,6 +64,16 @@ def valid_timezone(name):
         return not available_timezones() and bool(re.fullmatch(r"[A-Za-z_]+(?:/[A-Za-z0-9_+-]+){0,2}", name))
 
 
+def validate_demos(demos):
+    require(isinstance(demos, dict), "demos must be an object")
+    unknown = sorted(set(demos) - set(DEMO_DEFAULTS))
+    require(not unknown, f"demos.{unknown[0] if unknown else ''} is not a setting; use {', '.join(DEMO_DEFAULTS)}")
+    require(demos["policy"] in DEMO_POLICIES, "demos.policy must be auto (build on its own), ask (ask first) or off")
+    require(demos["scope"] in DEMO_SCOPES, "demos.scope must be small, medium or large")
+    require(isinstance(demos["allow_installs"], bool), "demos.allow_installs must be true or false")
+    require(type(demos["max_per_run"]) is int and 0 <= demos["max_per_run"] <= 5, "demos.max_per_run must be 0-5")
+
+
 def validate_config(config):
     require(isinstance(config, dict), "repomuse.json must be an object")
     title = config.get("title")
@@ -77,6 +93,7 @@ def validate_config(config):
     demo = config.get("demo_port")
     require(demo is None or (type(demo) is int and 1024 <= demo <= 65535 and demo != port),
             "demo_port must be a different port between 1024 and 65535 (default: port + 1)")
+    validate_demos(config.get("demos"))
     topics = config.get("topics")
     require(isinstance(topics, list) and 1 <= len(topics) <= 24, "topics needs 1-24 entries")
     seen = set()
@@ -97,6 +114,8 @@ def load_config(paths=None):
     if paths.config.exists():
         user = json.loads(paths.config.read_text(encoding="utf-8"))
         require(isinstance(user, dict), "repomuse.json must be an object")
+        if isinstance(user.get("demos"), dict):
+            user = dict(user, demos=dict(DEMO_DEFAULTS, **user["demos"]))
         config.update(user)
     return validate_config(config)
 

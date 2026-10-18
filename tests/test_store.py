@@ -124,6 +124,55 @@ class DemoAttachTests(StoreTestCase):
             attach_demo("a/one", dict(DEMO, status="blocked"), self.paths)
 
 
+class DemoSettingsTests(StoreTestCase):
+    def demo(self, slug="tiny-ui"):
+        folder = self.paths.demos / slug
+        folder.mkdir(parents=True, exist_ok=True)
+        (folder / "index.html").write_text("<p>demo</p>", encoding="utf-8")
+        return dict(DEMO, path=f"/demos/{slug}/")
+
+    def settings(self, **demos):
+        self.paths.config.write_text(json.dumps({"demos": demos}), encoding="utf-8")
+
+    def test_policy_off_refuses_every_demo(self):
+        publish(edition("2026-10-14", [project(repo="a/one")]), self.paths)
+        self.settings(policy="off")
+        with self.assertRaises(ValueError) as caught:
+            attach_demo("a/one", self.demo(), self.paths)
+        self.assertIn('policy is "off"', str(caught.exception))
+
+    def test_max_per_run_counts_other_demos_in_the_same_edition(self):
+        publish(edition("2026-10-14", [project(repo="a/one"), project(repo="a/two"), project(repo="a/three")]), self.paths)
+        self.settings(max_per_run=2)
+        attach_demo("a/one", self.demo("one"), self.paths)
+        attach_demo("a/two", self.demo("two"), self.paths)
+        attach_demo("a/two", self.demo("two"), self.paths)  # replacing a demo is not a new one
+        with self.assertRaises(ValueError) as caught:
+            attach_demo("a/three", self.demo("three"), self.paths)
+        self.assertIn("max_per_run is 2", str(caught.exception))
+
+    def test_allow_installs_false_rejects_installed_packages(self):
+        publish(edition("2026-10-14", [project(repo="a/one")]), self.paths)
+        self.settings(allow_installs=False)
+        demo = self.demo()
+        (self.paths.demos / "tiny-ui" / "package.json").write_text("{}", encoding="utf-8")
+        with self.assertRaises(ValueError) as caught:
+            attach_demo("a/one", demo, self.paths)
+        self.assertIn("package.json", str(caught.exception))
+        (self.paths.demos / "tiny-ui" / "package.json").unlink()
+        self.assertEqual(attach_demo("a/one", demo, self.paths), "2026-10-14")
+
+    def test_settings_are_validated_and_partial_objects_keep_defaults(self):
+        self.settings(scope="large")
+        self.assertEqual(load_config(self.paths)["demos"],
+                         {"policy": "ask", "scope": "large", "allow_installs": True, "max_per_run": 1})
+        for bad in ({"policy": "always"}, {"scope": "huge"}, {"allow_installs": "yes"}, {"max_per_run": 6},
+                    {"time_budget_minutes": 30}):
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                self.paths.config.write_text(json.dumps({"demos": bad}), encoding="utf-8")
+                load_config(self.paths)
+
+
 class FeedbackTests(StoreTestCase):
     def test_votes_are_saved_lowercased_and_can_be_cleared(self):
         set_vote("Owner/Repo", "like", "Exactly my stack", self.paths)

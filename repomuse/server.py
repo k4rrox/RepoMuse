@@ -21,7 +21,6 @@ PAGE = ("index.html", "text/html; charset=utf-8")
 ASSETS = {
     "/": PAGE, "/daily": PAGE, "/daily/": PAGE,
     "/app.css": ("app.css", "text/css; charset=utf-8"),
-    "/mark.svg": ("mark.svg", "image/svg+xml"),
 }
 DEMO_TYPES = {
     ".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8",
@@ -119,7 +118,11 @@ class Handler(BaseHTTPRequestHandler):
             return
         paths = Paths(ROOT)
         path = urlsplit(self.path).path
-        if path in ("/api/editions", "/api/daily"):
+        if path == "/favicon.ico":  # the page has no icon; answer quietly instead of logging a 404
+            self.send_response(204)
+            self.send_header("Content-Length", "0")
+            self.end_headers()
+        elif path in ("/api/editions", "/api/daily"):
             data = self.data_or_error(head, lambda: load_editions(paths))
             if data is not None:
                 self.respond(200, data, head=head)

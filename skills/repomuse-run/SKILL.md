@@ -94,8 +94,9 @@ Never edit the user's own sections without asking.
 
 ## 8. Demos and report
 
-- If a pick is easy to show and the profile allows demos, continue with the `repomuse-demo` skill
-  (or ask first, as the profile says).
+- If a pick is easy to show, follow `demos` in `repomuse.json`: with `policy: auto` continue with the
+  `repomuse-demo` skill (up to `max_per_run` demos); with `ask`, name the demo you would build and wait for a yes;
+  with `off`, build none. Only propose demos that fit `scope`.
 - Finish according to `mode` in `repomuse.json`:
   - `ui`: a short report (each pick in one line with its `fit`, anything you skipped and why) and the page link.
   - `no-ui`: run `python3 -m repomuse digest` and paste its Markdown into the chat as is, then add one line on

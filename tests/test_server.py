@@ -147,7 +147,9 @@ class DemoServingTests(ServerTestCase):
                 self.assertEqual(self.request(path, demo=True)[0], 404)
 
     def test_main_page_keeps_its_own_policy_and_foreign_host_is_rejected(self):
-        for path in ("/", "/daily", "/js/main.js", "/js/strings.js", "/mark.svg"):
+        self.assertEqual(self.request("/favicon.ico")[0], 204)
+        self.assertEqual(self.request("/mark.svg")[0], 404)
+        for path in ("/", "/daily", "/js/main.js", "/js/strings.js"):
             code, headers, _ = self.request(path)
             self.assertEqual(code, 200, path)
             self.assertNotIn("sandbox", headers["Content-Security-Policy"])

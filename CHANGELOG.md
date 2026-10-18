@@ -2,8 +2,12 @@
 
 ## Unreleased
 
+- `demos` settings in `repomuse.json`: `policy` (auto / ask / off), `scope` (small / medium / large),
+  `allow_installs` and `max_per_run`. `attach-demo` enforces policy, the per-edition limit and installs; the skills
+  follow scope. The profile's free-text "Demos" note is replaced by these settings.
 - Demo library thumbnails sit at the top of their card instead of floating in the middle of tall cards.
 - READMEs show the demo library between the picks page and a demo.
+- No logo: the page header is the name in text, the READMEs drop the icon, and `/favicon.ico` answers 204.
 
 ## 0.1.0 (2026-10-17)
 

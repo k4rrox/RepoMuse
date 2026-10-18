@@ -8,8 +8,24 @@ description: Build, verify and attach a small sandboxed demo for a RepoMuse pick
 A demo is one small, complete experiment that shows a single capability of a picked project, running the
 project's real code. It is what makes a pick tryable in a minute instead of described.
 
-All commands run from the RepoMuse checkout root. Respect the profile's `## Demos` preference
-(build on your own / ask first / never).
+All commands run from the RepoMuse checkout root. Read `demos` in `repomuse.json` first and stay inside it:
+
+| Setting | Meaning |
+| --- | --- |
+| `policy` | `auto`: build demos on your own. `ask`: propose the demo and wait for a yes. `off`: build none. |
+| `scope` | how big a demo may get (below). Anything beyond it is recorded as `blocked`, with the reason. |
+| `allow_installs` | `false`: no package installs or builds; only files that run as they are (plain JS, upstream's prebuilt browser bundle). |
+| `max_per_run` | at most this many demos in one edition. |
+
+| `scope` | What fits |
+| --- | --- |
+| `small` | one capability on one static page: a few controls, upstream code used as is, no bundling. |
+| `medium` | several interactions or views; you may install packages inside the demo folder and bundle them (esbuild or upstream's own build). |
+| `large` | a fuller scenario such as an editable timeline, several linked views or a generated artifact, with heavier local builds. |
+
+Every scope keeps the limits below: no long-running services, paid APIs, credentials or deployment.
+`attach-demo` refuses a demo when `policy` is `off`, when the edition already holds `max_per_run` demos, or when
+`allow_installs` is `false` and the folder contains `node_modules`, `package.json` or a lock file.
 
 ## 1. Choose
 

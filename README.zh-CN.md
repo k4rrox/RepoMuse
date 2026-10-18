@@ -1,5 +1,3 @@
-<p align="center"><img src="web/mark.svg" width="56" height="56" alt=""></p>
-
 <h1 align="center">RepoMuse</h1>
 
 <p align="center"><strong>为你量身挑选的 GitHub 项目精选，每个项目都附带你的 Agent 亲手做好、可以直接试用的 Demo。</strong></p>
@@ -87,6 +85,23 @@ Let agents choose a visual direction for web pages, then check and fix it in a r
 **Verified demo** Break "template look" into checkable details, then scan real code. Try it: `python3 -m repomuse demo taste-skill`
 ```
 
+## Demo 设置
+
+`repomuse.json` 里的 `demos` 决定 Agent 做 Demo 能做到什么程度。只需写你想改的字段。
+
+```json
+"demos": { "policy": "ask", "scope": "medium", "allow_installs": true, "max_per_run": 1 }
+```
+
+| 字段 | 取值 |
+| --- | --- |
+| `policy` | `auto` 主动做 · `ask`（默认）先提出、等你同意再做 · `off` 不做 |
+| `scope` | `small` 一个页面、一个功能 · `medium`（默认）多步交互，可以打包依赖 · `large` 更完整的场景，允许较重的本地构建 |
+| `allow_installs` | `true`（默认）允许在 Demo 目录内安装依赖；`false` 只允许无需安装就能运行的文件 |
+| `max_per_run` | 每期最多几个 Demo，0–5（默认 1） |
+
+`attach-demo` 会强制检查 `policy`、`max_per_run` 和 `allow_installs`；Demo Skill 负责把每个 Demo 控制在 `scope` 之内。
+
 ## 工作原理
 
 ```text
@@ -111,7 +126,7 @@ profile.md + 反馈 ──▶ Agent 运行 repomuse-run ──▶ 发布（校�
 | 文件 | 由谁写入 | 内容 |
 | --- | --- | --- |
 | `profile.md` | 你和 Agent | 关注什么、不想看什么、Agent 观察到的偏好 |
-| `repomuse.json` | 初始化 | 标题、模式（`ui` / `no-ui`）、语言、时区、周期、每期数量、方向、端口 |
+| `repomuse.json` | 初始化 | 标题、模式（`ui` / `no-ui`）、语言、时区、周期、每期数量、方向、端口、Demo 设置 |
 | `data/editions.json` | `publish` | 所有精选期数 |
 | `data/feedback.json` | 网页或 `vote` | 你的"有用 / 不想看" |
 | `demos/<slug>/` | Agent | 它做好的 Demo |

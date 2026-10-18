@@ -36,14 +36,18 @@ Ask, with a suggested default for each, so the user can answer "defaults are fin
 5. Language and timezone for the picks? Detect defaults from the system: the IANA zone from
    `readlink /etc/localtime` (the part after `zoneinfo/`) or `timedatectl show -p Timezone --value`, and the
    language from `$LANG`. `date +%Z` gives an abbreviation such as PDT, which is not a valid `timezone`.
-6. May I build small demos on my own for picks that are easy to show? (yes / ask me first / no)
+6. Demos for picks that are easy to show: may I build them on my own, ask you first, or not at all? And how big:
+   small (one feature on one page), medium (a few interactions, may install packages) or large (a fuller scenario)?
 7. Where do you want the picks: a local page you browse, or right here in the chat? (page / chat)
 
 ## 4. Write what you heard
 
 - `profile.md`: rewrite each section in the user's own words. Keep their phrasing; do not pad it.
-  Add a `## Demos` section recording answer 6. Leave `## What the agent has noticed` empty.
+  Leave `## What the agent has noticed` empty.
 - `repomuse.json`:
+  - `demos`: from answer 6, for example `{ "policy": "auto", "scope": "medium", "allow_installs": true,
+    "max_per_run": 1 }`. `policy` is `auto`, `ask` or `off`; `scope` is `small`, `medium` or `large`. Defaults: `ask`,
+    `medium`, installs allowed, 1 demo per edition. Only write the keys the user changed.
   - `mode`: `ui` for the local page, `no-ui` for picks delivered in the chat (answer 7). Both keep the
     same data, and the user can switch at any time.
   - `language`: a tag such as `en`, `zh-CN` or `pt-BR`. Picks are written in it and dates follow it.

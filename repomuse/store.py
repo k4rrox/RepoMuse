@@ -104,6 +104,26 @@ def require_demo_files(demo, paths):
         require(page.is_file(), f"demo path {demo['path']} has no index.html in this checkout")
 
 
+INSTALL_MARKERS = ("node_modules", "package.json", "package-lock.json", "pnpm-lock.yaml", "yarn.lock", "bun.lockb",
+                   "requirements.txt", "pyproject.toml")
+
+
+def demo_folder(demo, paths):
+    return paths.demos / demo["path"].strip("/").split("/", 1)[1] if demo.get("path") else None
+
+
+def check_demo_policy(demo, edition, repo, settings, paths):
+    """The limits in repomuse.json "demos" that code can check; scope is judged by the agent (see the demo skill)."""
+    require(settings["policy"] != "off", 'demos.policy is "off" in repomuse.json, so no demo can be attached')
+    others = sum(1 for project in edition["projects"] if project.get("demo") and project["repo"].lower() != repo.lower())
+    require(others < settings["max_per_run"],
+            f"the {edition['day']} edition already has {others} demo(s); demos.max_per_run is {settings['max_per_run']}")
+    folder = demo_folder(demo, paths)
+    if not settings["allow_installs"] and folder is not None:
+        found = sorted(name for name in INSTALL_MARKERS if any(folder.rglob(name)))
+        require(not found, f"demos.allow_installs is false, but {folder.name}/ contains {', '.join(found)}")
+
+
 def attach_demo(repo, demo, paths=None, check_only=False):
     """Put a demo on the latest edition that already lists the repo, keeping its day and Stars snapshot."""
     paths = paths or Paths()
@@ -112,11 +132,13 @@ def attach_demo(repo, demo, paths=None, check_only=False):
     check_demo_fields(demo, "demo")
     not_in_future(demo, "demo")
     require_demo_files(demo, paths)
+    settings = load_config(paths)["demos"]
     with LOCK:
         editions = own_editions(paths)
         for edition in editions:  # newest first
             for project in edition["projects"]:
                 if project["repo"].lower() == repo.lower():
+                    check_demo_policy(demo, edition, repo, settings, paths)
                     project["demo"] = demo
                     if not check_only:
                         save_editions(paths, editions)

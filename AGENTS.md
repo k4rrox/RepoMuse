@@ -38,7 +38,8 @@ python3 -m repomuse demo [SLUG] [--no-open]  # no-ui mode: serve demos only and 
 - **User files are private.** `profile.md`, `repomuse.json`, `strings.json`, `data/`, `work/` and user demos
   are gitignored.
   Do not commit or upload them.
-- **Demos stay in their folder.** Dependencies install only inside `demos/<slug>/`; no credentials, no paid
+- **Demos stay in their folder and their settings.** Follow `demos` in `repomuse.json` (`policy`, `scope`,
+  `allow_installs`, `max_per_run`). Dependencies install only inside `demos/<slug>/`; no credentials, no paid
   services, no deployment.
 - **Mode.** `mode` in `repomuse.json` is `ui` (the local page) or `no-ui` (picks, feedback and demo links in
   the chat). The data is the same either way; the skills say where each step differs.

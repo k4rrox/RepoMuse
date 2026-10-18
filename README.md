@@ -1,5 +1,3 @@
-<p align="center"><img src="web/mark.svg" width="56" height="56" alt=""></p>
-
 <h1 align="center">RepoMuse</h1>
 
 <p align="center"><strong>A personalized feed of GitHub projects, each shown with a demo your agent built so you can try it.</strong></p>
@@ -90,6 +88,23 @@ Let agents choose a visual direction for web pages, then check and fix it in a r
 **Verified demo** Break "template look" into checkable details, then scan real code. Try it: `python3 -m repomuse demo taste-skill`
 ```
 
+## Demo settings
+
+`demos` in `repomuse.json` sets how far the agent goes. Write only the keys you change.
+
+```json
+"demos": { "policy": "ask", "scope": "medium", "allow_installs": true, "max_per_run": 1 }
+```
+
+| Key | Values |
+| --- | --- |
+| `policy` | `auto` builds demos on its own · `ask` (default) proposes one and waits for your yes · `off` builds none |
+| `scope` | `small` one feature on one page · `medium` (default) several interactions, may bundle packages · `large` a fuller scenario with heavier local builds |
+| `allow_installs` | `true` (default) lets the agent install packages inside the demo folder; `false` allows only files that run as they are |
+| `max_per_run` | demos per edition, 0-5 (default 1) |
+
+`attach-demo` enforces `policy`, `max_per_run` and `allow_installs`; the demo skill keeps each demo within `scope`.
+
 ## How it works
 
 ```text
@@ -114,7 +129,7 @@ All personal state lives in the checkout and is **gitignored**, so `git pull` up
 | File | Written by | Holds |
 | --- | --- | --- |
 | `profile.md` | you and the agent | what to watch, what to skip, what the agent has noticed |
-| `repomuse.json` | setup | title, mode (`ui` / `no-ui`), language, timezone, cadence, picks per run, topics, port |
+| `repomuse.json` | setup | title, mode (`ui` / `no-ui`), language, timezone, cadence, picks per run, topics, port, demo settings |
 | `data/editions.json` | `publish` | every edition |
 | `data/feedback.json` | the page or `vote` | your likes and dislikes |
 | `demos/<slug>/` | the agent | demos it built |
