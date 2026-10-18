@@ -2,8 +2,8 @@
 import { getJson } from './api.js';
 import { $, status } from './dom.js';
 import { loadVotes } from './feedback.js';
-import { render, renderChrome, renderEditionPicker } from './render.js';
-import { editions, readUrl, state } from './state.js';
+import { render, renderChrome, renderEditionPicker, showResultsStart } from './render.js';
+import { editions, forgetKept, readUrl, state } from './state.js';
 import { setStrings, t } from './strings.js';
 
 let requestId = 0;
@@ -60,15 +60,19 @@ async function load() {
 function selectDay(day) {
   state.day = day;
   $('edition').value = day;
+  forgetKept();
   status('');
   render();
+  showResultsStart();
 }
 
 function resetFilters() {
   Object.assign(state, { topic: 'all', verdict: 'all', feedback: 'all', query: '' });
+  forgetKept();
   $('search').value = '';
   status('');
   render();
+  showResultsStart();
 }
 
 function bindControls() {
@@ -82,8 +86,8 @@ function bindControls() {
       if (next) selectDay(next.day);
     });
   }
-  $('search').addEventListener('input', () => { state.query = $('search').value; render(); });
-  $('sort').addEventListener('change', () => { state.sort = $('sort').value; render(); });
+  $('search').addEventListener('input', () => { state.query = $('search').value; forgetKept(); render(); showResultsStart(); });
+  $('sort').addEventListener('change', () => { state.sort = $('sort').value; forgetKept(); render(); showResultsStart(); });
   $('reset-filters').addEventListener('click', resetFilters);
   $('empty-reset').addEventListener('click', resetFilters);
 }

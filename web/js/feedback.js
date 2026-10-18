@@ -3,7 +3,7 @@
 import { getJson, sendVote } from './api.js';
 import { element, icon, link, status } from './dom.js';
 import { closeReasonPanel, openReasonPanel } from './reasons.js';
-import { isSample, state, vote } from './state.js';
+import { isSample, keepVisible, state, vote } from './state.js';
 import { storageGet, storageSet } from './storage.js';
 import { t } from './strings.js';
 
@@ -57,6 +57,7 @@ export async function loadVotes(data) {
 // Returns [message, isError] for the status line.
 async function saveVote(project, selected, extra = NO_DETAILS, savedMessage = 'feedback.saved') {
   const key = project.repo.toLowerCase();
+  keepVisible(key);
   if (selected) state.votes[key] = selected;
   else delete state.votes[key];
   state.reasons[key] = selected === 'dislike' ? extra : NO_DETAILS;

@@ -10,6 +10,9 @@ export const state = {
   data: null,
   votes: {},  // repo -> 'like' | 'dislike'
   reasons: {},  // repo -> { reasons: [codes], note } for a dislike
+  // Picks rated since the filters last changed stay listed, so a card never vanishes under the pointer
+  // (and the "Not for me" panel has a card to open on). Any filter, search, sort or edition change clears it.
+  kept: new Set(),
   // Filters, mirrored in the URL so a view can be shared or reloaded.
   view: 'daily', day: null, topic: 'all', verdict: 'all', feedback: 'all', query: '', sort: 'editorial',
 };
@@ -65,6 +68,14 @@ export function feedbackMatches(project, key) {
   return key === 'unread' ? !vote(project) : vote(project) === key;
 }
 
+export function keepVisible(repo) {
+  state.kept.add(repo.toLowerCase());
+}
+
+export function forgetKept() {
+  state.kept.clear();
+}
+
 export function hasFilters() {
   return state.topic !== 'all' || state.verdict !== 'all' || state.feedback !== 'all' || Boolean(state.query.trim());
 }
@@ -89,7 +100,7 @@ export function selection(all) {
   const inTopic = all.filter(project => state.topic === 'all' || project.topic === state.topic);
   const inVerdict = inTopic.filter(project => state.verdict === 'all' || project.verdict === state.verdict);
   const needle = state.query.trim().toLocaleLowerCase();
-  let visible = inVerdict.filter(project => feedbackMatches(project, state.feedback))
+  let visible = inVerdict.filter(project => feedbackMatches(project, state.feedback) || state.kept.has(project.repo.toLowerCase()))
     .filter(project => !needle || searchText(project).includes(needle));
   if (state.sort === 'name') visible = [...visible].sort((a, b) => a.name.localeCompare(b.name));
   if (state.sort === 'easy') visible = [...visible].sort((a, b) => EFFORT_ORDER[a.effort] - EFFORT_ORDER[b.effort]);

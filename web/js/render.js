@@ -4,29 +4,46 @@ import { demoEntry } from './demos.js';
 import { $, element } from './dom.js';
 import { dayLabel, shortDay, timeLabel, topicLabel } from './format.js';
 import {
-  FEEDBACK_KEYS, VERDICT_KEYS, demoLibrary, editions, feedbackMatches, hasFilters, isSample, projects, selectedEdition,
+  FEEDBACK_KEYS, VERDICT_KEYS, demoLibrary, editions, feedbackMatches, forgetKept, hasFilters, isSample, projects, selectedEdition,
   selection, state, urlFor,
 } from './state.js';
 import { t, tn } from './strings.js';
 
 const DEMO_GROUPS = ['ready', 'blocked', 'failed'];
 
+// After a filter, sort, search or edition change, show the start of the new results. On desktop the feed is its own
+// scroll area; on phones the page scrolls, and only moves when the results start above the screen.
+export function showResultsStart() {
+  const feed = $('feed');
+  if (getComputedStyle(feed).overflowY === 'auto') feed.scrollTop = 0;
+  else if ($('results').getBoundingClientRect().top < 0) feed.scrollIntoView({ block: 'start' });
+}
+
 function filterButtons(id, options, selected, count, onSelect) {
   $(id).replaceChildren(...options.map(([key, label]) => {
     const total = count(key);
     const button = element('button', `filter-button${key === selected ? ' selected' : ''}${total ? '' : ' empty'}`);
     button.type = 'button';
+    button.dataset.key = key;
     button.setAttribute('aria-pressed', String(key === selected));
     button.append(element('span', '', label), element('span', 'filter-count', String(total)));
     button.addEventListener('click', () => {
       onSelect(key);
+      forgetKept();
       render();
+      showResultsStart();
+      // The buttons were rebuilt; keep keyboard users on the one they just pressed.
+      $(id).querySelector(`[data-key="${key}"]`)?.focus({ preventScroll: true });
     });
     return button;
   }));
 }
 
 function renderFilters(all, { topicIds, inTopic, inVerdict }) {
+  // A topic list with one real choice filters nothing ("All topics 10" and "AI 10" show the same list): hide it,
+  // unless a topic is selected and must stay undoable.
+  const usedTopics = topicIds.filter(id => all.some(project => project.topic === id));
+  $('topic-group').hidden = usedTopics.length < 2 && state.topic === 'all';
   filterButtons('topics', [['all', t('topic.all')], ...topicIds.map(id => [id, topicLabel(id)])], state.topic,
     key => all.filter(project => key === 'all' || project.topic === key).length, key => { state.topic = key; });
   filterButtons('verdicts', [['all', t('verdict.all')], ...VERDICT_KEYS.map(key => [key, t(`verdict.${key}`)])], state.verdict,

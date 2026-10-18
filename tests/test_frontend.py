@@ -80,6 +80,20 @@ assert.deepEqual(selection(all).visible.map(p => p.name), ['Alpha']);
 assert.equal(state.topic, 'all');
 """)
 
+    def test_a_just_rated_pick_stays_listed_until_the_filters_change(self):
+        self.run_node(r"""
+const { keepVisible, forgetKept } = await load('state');
+const all = [{ name: 'One', repo: 'o/One', topic: 'ai', verdict: 'try', effort: 'low' },
+             { name: 'Two', repo: 'o/two', topic: 'ai', verdict: 'try', effort: 'low' }];
+Object.assign(state, { topic: 'all', verdict: 'all', feedback: 'unread', query: '', sort: 'editorial', votes: {} });
+assert.deepEqual(selection(all).visible.map(p => p.name), ['One', 'Two']);
+state.votes['o/one'] = 'dislike';
+keepVisible('o/One');
+assert.deepEqual(selection(all).visible.map(p => p.name), ['One', 'Two']);  // still shown under "Not rated"
+forgetKept();
+assert.deepEqual(selection(all).visible.map(p => p.name), ['Two']);  // the next filter change applies it
+""")
+
     def test_language_topics_timezone_and_agent_strings_follow_config(self):
         self.run_node(r"""
 assert.equal(t('verdict.try'), 'Worth trying');
