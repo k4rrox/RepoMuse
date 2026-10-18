@@ -40,10 +40,6 @@ function filterButtons(id, options, selected, count, onSelect) {
 }
 
 function renderFilters(all, { topicIds, inTopic, inVerdict }) {
-  // A topic list with one real choice filters nothing ("All topics 10" and "AI 10" show the same list): hide it,
-  // unless a topic is selected and must stay undoable.
-  const usedTopics = topicIds.filter(id => all.some(project => project.topic === id));
-  $('topic-group').hidden = usedTopics.length < 2 && state.topic === 'all';
   filterButtons('topics', [['all', t('topic.all')], ...topicIds.map(id => [id, topicLabel(id)])], state.topic,
     key => all.filter(project => key === 'all' || project.topic === key).length, key => { state.topic = key; });
   filterButtons('verdicts', [['all', t('verdict.all')], ...VERDICT_KEYS.map(key => [key, t(`verdict.${key}`)])], state.verdict,

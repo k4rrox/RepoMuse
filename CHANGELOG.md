@@ -2,8 +2,7 @@
 
 ## Unreleased
 
-- Interaction fixes: a topic list with a single topic is hidden (it filtered nothing); filter, search, sort and
-  edition changes show the start of the results; a pick you just rated stays listed until the filters change, so
+- Interaction fixes: filter, search, sort and edition changes show the start of the results; a pick you just rated stays listed until the filters change, so
   the "Not for me" panel opens even under "Not rated" or "Useful"; keyboard focus stays on the filter you pressed.
 - "Not for me" opens a panel to say why: five fixed reasons the agent acts on (`off-topic`, `too-heavy`,
   `already-known`, `too-early`, `inaccurate`) plus "Other" with free text. The vote is saved at once; reasons are
