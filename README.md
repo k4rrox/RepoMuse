@@ -31,8 +31,9 @@ open in a browser tab. You mark picks *useful* or *not for me*; the agent reads 
 - **Small on purpose.** No framework, no build step, no database. Clone it and it runs.
 
 <p align="center">
-  <img src="docs/images/picks.jpg" width="49%" alt="The picks page: filters on the left, a project card with why-now, core stack, license and effort">
-  <img src="docs/images/demo.jpg" width="49%" alt="A demo: the real Taste Skill scanner running in the browser, with its findings next to the sample">
+  <img src="docs/images/picks.jpg" width="32%" alt="The picks page: filters on the left, a project card with why-now, core stack, license and effort">
+  <img src="docs/images/library.jpg" width="32%" alt="The demo library: every verified demo across editions, with its cover, project and stack">
+  <img src="docs/images/demo.jpg" width="32%" alt="A demo: the real Taste Skill scanner running in the browser, with its findings next to the sample">
 </p>
 
 ## Try it in 30 seconds

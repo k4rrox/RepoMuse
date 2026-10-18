@@ -31,8 +31,9 @@ RepoMuse をコーディングエージェントに導入し、関心のある�
 - **あえて小さく。** フレームワークもビルド手順もデータベースもありません。クローンすればすぐ動きます。
 
 <p align="center">
-  <img src="docs/images/picks.jpg" width="49%" alt="ピック一覧：左にフィルター、右に注目理由・主要技術・ライセンス・試しやすさを示すプロジェクトカード">
-  <img src="docs/images/demo.jpg" width="49%" alt="デモ：本物の Taste Skill スキャナーがブラウザで動き、サンプルの横に結果を表示">
+  <img src="docs/images/picks.jpg" width="32%" alt="ピック一覧：左にフィルター、右に注目理由・主要技術・ライセンス・試しやすさを示すプロジェクトカード">
+  <img src="docs/images/library.jpg" width="32%" alt="デモ一覧：すべての回の検証済みデモを、サムネイル・プロジェクト・技術とともに表示">
+  <img src="docs/images/demo.jpg" width="32%" alt="デモ：本物の Taste Skill スキャナーがブラウザで動き、サンプルの横に結果を表示">
 </p>
 
 ## 30 秒で試す

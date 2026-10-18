@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Demo library thumbnails sit at the top of their card instead of floating in the middle of tall cards.
+- READMEs show the demo library between the picks page and a demo.
+
 ## 0.1.0 (2026-10-17)
 
 First public version, grown out of the author's private "Open Source Radar".

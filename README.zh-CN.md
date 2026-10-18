@@ -29,8 +29,9 @@
 - **刻意保持小巧。** 没有框架、没有构建步骤、没有数据库，克隆下来就能运行。
 
 <p align="center">
-  <img src="docs/images/picks.jpg" width="49%" alt="精选页面：左侧是筛选，右侧是项目卡片，包含为什么关注、核心技术栈、许可证和试用门槛">
-  <img src="docs/images/demo.jpg" width="49%" alt="Demo：真实的 Taste Skill 扫描器在浏览器中运行，旁边是扫描结果">
+  <img src="docs/images/picks.jpg" width="32%" alt="精选页面：左侧是筛选，右侧是项目卡片，包含为什么关注、核心技术栈、许可证和试用门槛">
+  <img src="docs/images/library.jpg" width="32%" alt="Demo 库：汇总所有期中已验证的 Demo，带封面、所属项目和技术栈">
+  <img src="docs/images/demo.jpg" width="32%" alt="Demo：真实的 Taste Skill 扫描器在浏览器中运行，旁边是扫描结果">
 </p>
 
 ## 30 秒体验
