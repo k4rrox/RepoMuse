@@ -1,6 +1,9 @@
 {
   "name": "repomuse",
-  "owner": { "name": "k4rrox" },
+  "description": "RepoMuse: personalized GitHub picks with demos your agent builds and verifies.",
+  "owner": {
+    "name": "k4rrox"
+  },
   "plugins": [
     {
       "name": "repomuse",
