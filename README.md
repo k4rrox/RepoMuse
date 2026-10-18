@@ -43,7 +43,8 @@ git clone https://github.com/k4rrox/RepoMuse && cd RepoMuse
 ```
 
 Open http://127.0.0.1:53265/. You will see labelled **sample picks** and one sample demo (demos run on port 53266).
-Needs Python 3.9+ (already on macOS and most Linux). On Windows run `python -m repomuse serve`.
+Needs Python 3.9+ (already on macOS and most Linux). On Windows run `python -m repomuse serve`; optionally
+`pip install tzdata` so the chat digest can convert times to your timezone (the page always can).
 
 ## Make it yours
 

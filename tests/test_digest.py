@@ -2,7 +2,10 @@ import copy
 import unittest
 
 from repomuse.config import DEFAULTS, ROOT, validate_config
-from repomuse.digest import DEFAULT_STRINGS, pick_edition, render
+from unittest.mock import patch
+
+from repomuse import digest
+from repomuse.digest import DEFAULT_STRINGS, observed, pick_edition, render
 from repomuse.interface import page_strings
 
 from helpers import DEMO, edition, project
@@ -32,7 +35,8 @@ class DigestTests(unittest.TestCase):
         self.assertIn("### 1. [Tiny UI](https://github.com/owner/tiny-ui) · Watch closely", text)
         self.assertIn("**Why for you** You asked for small UI kits.", text)
         self.assertIn("**Why now** Why now", text)
-        self.assertIn("~12,345 stars (2026-10-17 09:30) · MIT · Effort: Low, try it right away · Outside your profile", text)
+        when = "2026-10-17 09:30" if digest.zone("Asia/Shanghai") else "2026-10-17 01:30 UTC"
+        self.assertIn(f"~12,345 stars ({when}) · MIT · Effort: Low, try it right away · Outside your profile", text)
         self.assertIn("Try it: `python3 -m repomuse demo tiny-ui`", text)
         self.assertIn("1 useful, 3 not for me", text)
 
@@ -59,6 +63,13 @@ class DigestTests(unittest.TestCase):
         self.assertIn("**为什么推给你** 适合你", text)
         self.assertIn("· 1 个推荐", text)
         self.assertIn("**Why now**", text)
+
+    def test_times_without_a_zone_database_keep_their_offset(self):
+        with patch.object(digest, "ZoneInfo", side_effect=Exception("no tzdata")):
+            self.assertEqual(observed("2026-10-17T09:30:00+08:00", "Asia/Shanghai"), "2026-10-17 09:30 UTC+08:00")
+            self.assertEqual(observed("2026-10-17T01:30:00Z", "Asia/Shanghai"), "2026-10-17 01:30 UTC")
+            self.assertEqual(observed("2026-10-16T18:30:00-07:00", "UTC"), "2026-10-17 01:30")
+        self.assertEqual(observed("not a time", "UTC"), "not a time")
 
     def test_pick_edition(self):
         data = {"editions": [edition("2026-10-15"), edition("2026-10-17"), edition("2026-10-16")]}

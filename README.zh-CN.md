@@ -41,7 +41,8 @@ git clone https://github.com/k4rrox/RepoMuse && cd RepoMuse
 ```
 
 打开 http://127.0.0.1:53265/ ，你会看到带有标注的**示例精选**和一个示例 Demo（Demo 运行在 53266 端口）。
-需要 Python 3.9+（macOS 和大多数 Linux 已自带）。在 Windows 上请运行 `python -m repomuse serve`。
+需要 Python 3.9+（macOS 和大多数 Linux 已自带）。在 Windows 上请运行 `python -m repomuse serve`；可选执行
+`pip install tzdata`，让对话摘要也能把时间转换到你的时区（网页始终可以）。
 
 ## 变成你自己的
 

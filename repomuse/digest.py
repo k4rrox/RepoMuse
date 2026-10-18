@@ -31,12 +31,27 @@ def label(strings, key, **values):
     return template
 
 
+def zone(name):
+    """The configured zone, or None where Python has no zone database (Windows without the tzdata package)."""
+    try:
+        return ZoneInfo(name)
+    except Exception:
+        return dt.timezone.utc if name.upper() in ("UTC", "ETC/UTC") else None
+
+
 def observed(value, timezone):
     try:
-        when = dt.datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(ZoneInfo(timezone))
-    except Exception:
+        when = dt.datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except (ValueError, TypeError):
         return value
-    return when.strftime("%Y-%m-%d %H:%M")
+    target = zone(timezone)
+    if target is not None:
+        return when.astimezone(target).strftime("%Y-%m-%d %H:%M")
+    # Cannot convert: keep the time as recorded and say which offset it is in.
+    offset = when.utcoffset() or dt.timedelta(0)
+    minutes = int(offset.total_seconds() // 60)
+    label = "UTC" if minutes == 0 else f"UTC{'+' if minutes > 0 else '-'}{abs(minutes) // 60:02d}:{abs(minutes) % 60:02d}"
+    return f"{when.strftime('%Y-%m-%d %H:%M')} {label}"
 
 
 def demo_slug(demo):

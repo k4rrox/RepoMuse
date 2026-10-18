@@ -44,6 +44,7 @@ git clone https://github.com/k4rrox/RepoMuse && cd RepoMuse
 
 http://127.0.0.1:53265/ を開くと、ラベル付きの**サンプルのピック**とサンプルのデモが 1 つ表示されます（デモはポート 53266 で動きます）。
 Python 3.9 以上が必要です（macOS とほとんどの Linux には標準で入っています）。Windows では `python -m repomuse serve` を実行してください。
+チャットのダイジェストでも時刻をタイムゾーンに変換したい場合は、任意で `pip install tzdata` を実行してください（ページ側は常に変換できます）。
 
 ## 自分用にする
 
