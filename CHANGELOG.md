@@ -7,6 +7,8 @@
   follow scope. The profile's free-text "Demos" note is replaced by these settings.
 - Demo library thumbnails sit at the top of their card instead of floating in the middle of tall cards.
 - READMEs show the demo library between the picks page and a demo.
+- On desktop the header stays put and the sidebar and the picks list scroll independently, so the filters stay
+  reachable on short windows; phones keep a single page scroll.
 - No logo: the page header is the name in text, the READMEs drop the icon, and `/favicon.ico` answers 204.
 
 ## 0.1.0 (2026-10-17)

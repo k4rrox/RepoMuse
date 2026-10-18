@@ -232,6 +232,29 @@ h1 { margin: 0; font-size: 40px; line-height: 1.1; font-weight: 700; letter-spac
   .demo-entry h2 { font-size: 20px; }
 }
 
+/* Desktop: the header stays put and the sidebar and the feed scroll on their own, so the filters are always
+   reachable however long the list is. The feed's scroll area runs to the window's right edge, so its scrollbar sits
+   where the page's would; --gutter keeps the content aligned with the header. Phones keep one page scroll. */
+@media (min-width: 721px) {
+  body { height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+  .masthead { flex: none; width: 100%; }
+  .layout {
+    --gutter: max(28px, calc((100vw - 1124px) / 2));
+    --side: 196px;
+    --gap: 56px;
+    --rail: 14px;  /* room for the selected filter's bleed and a scrollbar, taken from the gap */
+    flex: 1; min-height: 0; width: 100%; max-width: none; margin: 0; padding: 0;
+    grid-template-columns: calc(var(--gutter) + var(--side) + var(--rail)) minmax(0, 1fr); gap: 0; align-items: stretch;
+  }
+  .sidebar { position: static; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin;
+    padding: 24px var(--rail) 32px var(--gutter); }
+  .feed { min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable;
+    padding: 24px var(--gutter) 96px calc(var(--gap) - var(--rail)); }
+}
+@media (min-width: 721px) and (max-width: 1000px) {
+  .layout { --side: 168px; --gap: 32px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }
 }
