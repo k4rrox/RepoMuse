@@ -1,0 +1,10 @@
+{
+  "name": "repomuse",
+  "version": "0.1.0",
+  "description": "A personalized feed of GitHub projects, each shown with a demo your agent built so you can try it.",
+  "author": { "name": "k4rrox", "url": "https://github.com/k4rrox" },
+  "homepage": "https://github.com/k4rrox/RepoMuse",
+  "repository": "https://github.com/k4rrox/RepoMuse",
+  "license": "MIT",
+  "keywords": ["github", "curation", "agents", "demos", "skills"]
+}

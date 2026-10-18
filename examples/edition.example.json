@@ -1,0 +1,44 @@
+{
+  "day": "2026-10-17",
+  "updated_at": "2026-10-17T09:00:00+08:00",
+  "projects": [
+    {
+      "name": "Example Project",
+      "repo": "owner/repository",
+      "stars": { "count": 1234, "observed_at": "2026-10-17T09:00:00+08:00", "approximate": false },
+      "topic": "ai",
+      "event": "new",
+      "tags": ["Python", "MCP"],
+      "title": "One sentence on what it is for",
+      "summary": "What it does and what you get out of it.",
+      "reason": "Why it is worth a look now: a new capability or an important release.",
+      "fit": "Why it matches this profile: you asked for local agents with a small core, and this one is 2k lines of Python.",
+      "explore": false,
+      "verdict": "watch",
+      "effort": "medium",
+      "platforms": ["macOS", "Linux"],
+      "use_case": "Which task or workflow it suits.",
+      "requirements": "Runtime, model, hardware or accounts it needs.",
+      "assessment": "Your judgement and what it is based on.",
+      "caution": "What was not tested, author claims, known limits.",
+      "license": { "name": "MIT", "kind": "open-source", "url": "https://github.com/owner/repository/blob/main/LICENSE" },
+      "heat": {
+        "label": "+120 stars",
+        "window": "GitHub Trending 'today' window, not an exact 24 hours",
+        "observed_at": "2026-10-17T09:00:00+08:00",
+        "total_only": false
+      },
+      "tech_stack": {
+        "items": [
+          { "name": "Python", "role": "Agent runtime" },
+          { "name": "FastAPI", "role": "Local API" }
+        ],
+        "sources": [{ "label": "pyproject.toml", "url": "https://github.com/owner/repository/blob/main/pyproject.toml" }],
+        "verified_at": "2026-10-17T09:00:00+08:00"
+      },
+      "sources": [
+        { "label": "Repository and release notes", "url": "https://github.com/owner/repository", "observed_at": "2026-10-17T09:00:00+08:00" }
+      ]
+    }
+  ]
+}

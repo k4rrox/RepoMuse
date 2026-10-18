@@ -1,0 +1,2179 @@
+{
+  "schema_version": 2,
+  "sample": true,
+  "editions": [
+    {
+      "day": "2026-10-17",
+      "updated_at": "2026-10-17T13:01:56-07:00",
+      "projects": [
+        {
+          "name": "web-ocean",
+          "repo": "Noniv/web-ocean",
+          "topic": "ai",
+          "event": "new",
+          "tags": [
+            "WebGPU",
+            "Real-time graphics",
+            "Ocean rendering"
+          ],
+          "title": "Waves, sunsets and foam rendered live in one small web page",
+          "summary": "A WebGPU ocean renderer with no Three.js or game engine: WGSL compute shaders simulate multi-scale FFT waves, with sky, foam, reflections and a free camera.",
+          "reason": "Made public on October 16 at 16:49 Los Angeles time, with a self-contained HTML file and full shader source. A web graphics experiment you can see working immediately, useful for background scenes, visualization and AI-assisted graphics work. Recent star growth not verified.",
+          "verdict": "try",
+          "effort": "medium",
+          "platforms": [
+            "Chrome / WebGPU",
+            "GPU with WebGPU support"
+          ],
+          "use_case": "Understand WebGPU compute and render pipelines quickly, or explore immersive web backgrounds and interactive visuals with one complete small scene.",
+          "requirements": "A recent Chrome with WebGPU and a usable GPU; the official self-contained ocean.html opens directly. The development source needs Node.js, with esbuild used only for builds. No model, account or paid API.",
+          "assessment": "The pinned official engine ran in a local browser: all three sea states, sun height, dragging and pause work. A quick way to see what WebGPU can do visually. The small scene runs at 800×450 and at most 30 fps, which does not represent every device.",
+          "caution": "The author says it was written with AI help, but the runtime is a deterministic graphics program that calls no AI. Open sea only, with no shoreline or objects; clouds are a flat layer. Visuals and performance need testing on your own machine; upstream screenshots are no substitute.",
+          "stars": {
+            "count": 249,
+            "observed_at": "2026-10-17T08:01:37-07:00",
+            "approximate": false
+          },
+          "license": {
+            "name": "MIT",
+            "kind": "open-source",
+            "url": "https://github.com/Noniv/web-ocean/blob/a07c7fd522ef0a897601c114f927a49d93d95520/LICENSE"
+          },
+          "sources": [
+            {
+              "label": "Official repository and star count at collection",
+              "url": "https://github.com/Noniv/web-ocean",
+              "observed_at": "2026-10-17T08:01:37-07:00"
+            },
+            {
+              "label": "Official implementation, requirements and limits",
+              "url": "https://github.com/Noniv/web-ocean/blob/a07c7fd522ef0a897601c114f927a49d93d95520/README.md",
+              "observed_at": "2026-10-17T08:01:37-07:00"
+            },
+            {
+              "label": "Development dependencies and build",
+              "url": "https://github.com/Noniv/web-ocean/blob/a07c7fd522ef0a897601c114f927a49d93d95520/package.json",
+              "observed_at": "2026-10-17T08:01:37-07:00"
+            },
+            {
+              "label": "Device setup and render entry point",
+              "url": "https://github.com/Noniv/web-ocean/blob/a07c7fd522ef0a897601c114f927a49d93d95520/js/main.js",
+              "observed_at": "2026-10-17T08:01:37-07:00"
+            },
+            {
+              "label": "Open-source license",
+              "url": "https://github.com/Noniv/web-ocean/blob/a07c7fd522ef0a897601c114f927a49d93d95520/LICENSE",
+              "observed_at": "2026-10-17T08:01:37-07:00"
+            }
+          ],
+          "tech_stack": {
+            "items": [
+              {
+                "name": "JavaScript / ES Modules",
+                "role": "Camera, parameters and per-frame rendering"
+              },
+              {
+                "name": "WebGPU / WGSL",
+                "role": "GPU compute and shading"
+              },
+              {
+                "name": "FFT / JONSWAP",
+                "role": "Wave spectrum and multi-scale simulation"
+              },
+              {
+                "name": "HTML / CSS",
+                "role": "Canvas and settings UI"
+              },
+              {
+                "name": "Node.js / esbuild",
+                "role": "Official dev server and static build only"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Official implementation, requirements and limits",
+                "url": "https://github.com/Noniv/web-ocean/blob/a07c7fd522ef0a897601c114f927a49d93d95520/README.md"
+              },
+              {
+                "label": "Development dependencies and build",
+                "url": "https://github.com/Noniv/web-ocean/blob/a07c7fd522ef0a897601c114f927a49d93d95520/package.json"
+              },
+              {
+                "label": "Device setup and render entry point",
+                "url": "https://github.com/Noniv/web-ocean/blob/a07c7fd522ef0a897601c114f927a49d93d95520/js/main.js"
+              }
+            ],
+            "verified_at": "2026-10-17T08:01:37-07:00",
+            "note": "Rendering in the browser needs no Three.js, model or online service. FFT/JONSWAP are simulation methods; Node/esbuild are development build tools, not browser runtime dependencies."
+          }
+        },
+        {
+          "name": "leanrea",
+          "repo": "aicodeking/leanrea",
+          "topic": "ai",
+          "event": "new",
+          "tags": [
+            "Reverse engineering",
+            "Agent Skills",
+            "CLI"
+          ],
+          "title": "A short skill that has agents call local reverse-engineering tools directly",
+          "summary": "Built around a Markdown skill that picks a local CLI path per target (Electron, native binaries, Go, APK, WASM), with an investigation order and rules for stating evidence.",
+          "reason": "Made public on October 16 at 19:53 Los Angeles time as a direct answer to REA, picked earlier: for small analyses existing CLIs already cover, it lets you compare whether \"short skill + native tools\" works better. The author's performance comparison has not been reproduced independently.",
+          "verdict": "observe",
+          "effort": "medium",
+          "platforms": [
+            "Coding agent with shell access",
+            "Local tools installed per target"
+          ],
+          "use_case": "Analyse build artifacts of software you own or are authorized to inspect: extract dependency versions, trace Electron IPC, or locate a small piece of native logic, choosing existing tools per target.",
+          "requirements": "The skill runs no MCP server, but still needs an agent that can run shell commands and the matching tools, such as Node/asar, Xcode command line tools, Go or JADX/Ghidra. Model calls come from whatever agent you use, so it is not \"model-free\"; tool coverage differs by platform.",
+          "assessment": "Keep an eye on it; good for a small side-by-side against an existing REA workflow. The skill, license and the author's benchmark method were checked; the skill was not installed and no target software was analysed, so this is no evidence that it fully replaces REA.",
+          "caution": "The author's \"38% faster, 35% cheaper\" comes from a small sample: one model, one machine, 4 tasks run 3 times each. In that table leanrea scores 74/75 and REA 75/75, so accuracy is not equal on every task, and the declared tool size is not the per-turn footprint. The skill's commands extract and write files; review them for your environment before use.",
+          "stars": {
+            "count": 214,
+            "observed_at": "2026-10-17T08:01:37-07:00",
+            "approximate": false
+          },
+          "license": {
+            "name": "MIT",
+            "kind": "open-source",
+            "url": "https://github.com/aicodeking/leanrea/blob/09ba4aa0217f82cd880f855a60b877f59f39b22b/LICENSE"
+          },
+          "sources": [
+            {
+              "label": "Official repository and star count at collection",
+              "url": "https://github.com/aicodeking/leanrea",
+              "observed_at": "2026-10-17T08:01:37-07:00"
+            },
+            {
+              "label": "Official purpose, benchmark and limits",
+              "url": "https://github.com/aicodeking/leanrea/blob/09ba4aa0217f82cd880f855a60b877f59f39b22b/README.md",
+              "observed_at": "2026-10-17T08:01:37-07:00"
+            },
+            {
+              "label": "The actual skill content",
+              "url": "https://github.com/aicodeking/leanrea/blob/09ba4aa0217f82cd880f855a60b877f59f39b22b/leanrea/SKILL.md",
+              "observed_at": "2026-10-17T08:01:37-07:00"
+            },
+            {
+              "label": "Open-source license",
+              "url": "https://github.com/aicodeking/leanrea/blob/09ba4aa0217f82cd880f855a60b877f59f39b22b/LICENSE",
+              "observed_at": "2026-10-17T08:01:37-07:00"
+            }
+          ],
+          "tech_stack": {
+            "items": [
+              {
+                "name": "Agent Skills / Markdown",
+                "role": "Target routing, workflow and evidence rules"
+              },
+              {
+                "name": "Shell / local CLIs",
+                "role": "The skill has the agent run the actual analysis"
+              },
+              {
+                "name": "Python / Shell",
+                "role": "Author's benchmark and reproduction scripts"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Official purpose, benchmark and limits",
+                "url": "https://github.com/aicodeking/leanrea/blob/09ba4aa0217f82cd880f855a60b877f59f39b22b/README.md"
+              },
+              {
+                "label": "The actual skill content",
+                "url": "https://github.com/aicodeking/leanrea/blob/09ba4aa0217f82cd880f855a60b877f59f39b22b/leanrea/SKILL.md"
+              },
+              {
+                "label": "Open-source license",
+                "url": "https://github.com/aicodeking/leanrea/blob/09ba4aa0217f82cd880f855a60b877f59f39b22b/LICENSE"
+              }
+            ],
+            "verified_at": "2026-10-17T08:01:37-07:00",
+            "note": "An instruction skill, not a standalone decompiler. asar, otool, JADX, Ghidra and the like are external tools chosen per target, not a runtime this project implements or bundles. Benchmark scripts are not production dependencies."
+          }
+        },
+        {
+          "name": "Solid Glass",
+          "repo": "deeplethe/solid-glass",
+          "topic": "ai",
+          "event": "new",
+          "tags": [
+            "Design system",
+            "AI app UI",
+            "shadcn/ui"
+          ],
+          "title": "A restrained glass material and workflow components for AI apps",
+          "summary": "Light and dark themes on top of shadcn/ui and Base UI, plus AI interface components such as context usage, tool steps, input box, question cards and diff views; the core material lives in one CSS file.",
+          "reason": "Made public on October 12; the latest pinned version merged light-mode chart readability fixes on October 15 at 21:34 Los Angeles time. More practical than a visual reference: CSS, copyable source and a shadcn registry you can use directly in AI-assisted web work. Star growth not verified.",
+          "verdict": "try",
+          "effort": "medium",
+          "platforms": [
+            "Modern browsers",
+            "React 19 / Tailwind CSS 4 projects"
+          ],
+          "use_case": "Give an agent workbench, chat interface or lightweight web tool a consistent material and hierarchy, without assembling every status component from scratch.",
+          "requirements": "The official install path builds on React 19, Tailwind CSS 4 and the Base UI flavour of shadcn/ui; the local source site needs Node.js and npm. The theme needs no AI model, API key or database; real chats and agent execution are yours to wire up.",
+          "assessment": "Worth checking material, theme and component states in one small screen before estimating the cost of moving an existing project over. An early 0.1.0 repository; production accessibility and every component are not established yet.",
+          "caution": "This is styling and components, not an agent engine. The compatibility path targets Base UI components and will not cover every older Radix/shadcn project by default. The full site and real model tasks were not run this time.",
+          "stars": {
+            "count": 1686,
+            "observed_at": "2026-10-17T12:57:34-07:00",
+            "approximate": false
+          },
+          "license": {
+            "name": "MIT",
+            "kind": "open-source",
+            "url": "https://github.com/deeplethe/solid-glass/blob/6e8903e494a15491ceda38fafea5056c95a74d44/LICENSE"
+          },
+          "sources": [
+            {
+              "label": "Official repository and star count at collection",
+              "url": "https://github.com/deeplethe/solid-glass",
+              "observed_at": "2026-10-17T12:57:34-07:00"
+            },
+            {
+              "label": "Official purpose and install requirements",
+              "url": "https://github.com/deeplethe/solid-glass/blob/6e8903e494a15491ceda38fafea5056c95a74d44/README.md",
+              "observed_at": "2026-10-17T12:57:34-07:00"
+            },
+            {
+              "label": "Core style source",
+              "url": "https://github.com/deeplethe/solid-glass/blob/6e8903e494a15491ceda38fafea5056c95a74d44/src/solid-glass.css",
+              "observed_at": "2026-10-17T12:57:34-07:00"
+            },
+            {
+              "label": "Official dependency manifest",
+              "url": "https://github.com/deeplethe/solid-glass/blob/6e8903e494a15491ceda38fafea5056c95a74d44/package.json",
+              "observed_at": "2026-10-17T12:57:34-07:00"
+            },
+            {
+              "label": "Context usage component",
+              "url": "https://github.com/deeplethe/solid-glass/blob/6e8903e494a15491ceda38fafea5056c95a74d44/src/components/ui/context-ring.tsx",
+              "observed_at": "2026-10-17T12:57:34-07:00"
+            },
+            {
+              "label": "MIT license",
+              "url": "https://github.com/deeplethe/solid-glass/blob/6e8903e494a15491ceda38fafea5056c95a74d44/LICENSE",
+              "observed_at": "2026-10-17T12:57:34-07:00"
+            },
+            {
+              "label": "Third-party component notices",
+              "url": "https://github.com/deeplethe/solid-glass/blob/6e8903e494a15491ceda38fafea5056c95a74d44/NOTICE.md",
+              "observed_at": "2026-10-17T12:57:34-07:00"
+            }
+          ],
+          "tech_stack": {
+            "items": [
+              {
+                "name": "TypeScript / React 19",
+                "role": "Components, examples and docs site interactions"
+              },
+              {
+                "name": "Tailwind CSS 4 / CSS",
+                "role": "Theme variables and glass material"
+              },
+              {
+                "name": "shadcn/ui / Base UI",
+                "role": "Component structure and base interactions"
+              },
+              {
+                "name": "Vite / Node.js",
+                "role": "Local development, registry and static build"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Official purpose and install requirements",
+                "url": "https://github.com/deeplethe/solid-glass/blob/6e8903e494a15491ceda38fafea5056c95a74d44/README.md"
+              },
+              {
+                "label": "Core style source",
+                "url": "https://github.com/deeplethe/solid-glass/blob/6e8903e494a15491ceda38fafea5056c95a74d44/src/solid-glass.css"
+              },
+              {
+                "label": "Official dependency manifest",
+                "url": "https://github.com/deeplethe/solid-glass/blob/6e8903e494a15491ceda38fafea5056c95a74d44/package.json"
+              }
+            ],
+            "verified_at": "2026-10-17T12:57:34-07:00",
+            "note": "The core theme is CSS; React, Base UI and Tailwind are the official component and install path. Vite/Node are development tooling; no database or model layer of its own was found. Some third-party component notices are in NOTICE."
+          }
+        },
+        {
+          "name": "Lucian UX/UI Prompt",
+          "repo": "Seokwoooo/lucian-uxui-prompt",
+          "topic": "ai",
+          "event": "new",
+          "tags": [
+            "Interaction snippets",
+            "Vanilla web",
+            "AI coding prompts"
+          ],
+          "title": "Try an interaction first, then hand its full code to your AI to port",
+          "summary": "400 interaction snippets: 200 interface widgets and 200 website sections and motion effects, with light and dark themes, HTML/CSS/JavaScript code and porting prompts.",
+          "reason": "Made public on October 12; a commit on October 15 at 11:28 Los Angeles time grew the library to 400 items and reordered it. It connects \"seeing a good interaction\" with \"getting portable code\", a quick way to improve web UX in AI-assisted work. Star growth not verified.",
+          "verdict": "try",
+          "effort": "low",
+          "platforms": [
+            "Modern browsers",
+            "Node.js (only to build the library)"
+          ],
+          "use_case": "Pick a filter, editor, chart or site effect, try it, then hand the source and porting notes to your coding agent; no need to adopt a whole design system.",
+          "requirements": "The official local build needs only Node.js, with no npm install or account; each snippet is plain HTML/CSS/JavaScript. Porting uses the coding assistant you choose; the project provides no model service.",
+          "assessment": "Good for porting a few interactions into an existing site. Check keyboard, touch, empty states and the mapping to your theme before adopting; 400 items does not mean every scenario is production-proven.",
+          "caution": "The 400 count was checked against the official build constraints and source list, but not every item was run. The author's claims about touch, keyboard and reduced-motion support across all items were not fully verified; some upload or sign-in snippets are UI only, with no backend.",
+          "stars": {
+            "count": 164,
+            "observed_at": "2026-10-17T12:57:37-07:00",
+            "approximate": false
+          },
+          "license": {
+            "name": "MIT",
+            "kind": "open-source",
+            "url": "https://github.com/Seokwoooo/lucian-uxui-prompt/blob/7e339faa1cc5e87496cb7ce556a5b22aadbe76f8/LICENSE"
+          },
+          "sources": [
+            {
+              "label": "Official repository and star count at collection",
+              "url": "https://github.com/Seokwoooo/lucian-uxui-prompt",
+              "observed_at": "2026-10-17T12:57:37-07:00"
+            },
+            {
+              "label": "Official purpose and run instructions",
+              "url": "https://github.com/Seokwoooo/lucian-uxui-prompt/blob/7e339faa1cc5e87496cb7ce556a5b22aadbe76f8/README.md",
+              "observed_at": "2026-10-17T12:57:37-07:00"
+            },
+            {
+              "label": "Zero-dependency build script",
+              "url": "https://github.com/Seokwoooo/lucian-uxui-prompt/blob/7e339faa1cc5e87496cb7ce556a5b22aadbe76f8/src/build.mjs",
+              "observed_at": "2026-10-17T12:57:37-07:00"
+            },
+            {
+              "label": "Light and dark theme variables",
+              "url": "https://github.com/Seokwoooo/lucian-uxui-prompt/blob/7e339faa1cc5e87496cb7ce556a5b22aadbe76f8/src/tokens.css",
+              "observed_at": "2026-10-17T12:57:37-07:00"
+            },
+            {
+              "label": "MIT license",
+              "url": "https://github.com/Seokwoooo/lucian-uxui-prompt/blob/7e339faa1cc5e87496cb7ce556a5b22aadbe76f8/LICENSE",
+              "observed_at": "2026-10-17T12:57:37-07:00"
+            },
+            {
+              "label": "Official commit growing the library to 400 items",
+              "url": "https://github.com/Seokwoooo/lucian-uxui-prompt/commit/036fe0a6",
+              "observed_at": "2026-10-17T12:57:37-07:00"
+            }
+          ],
+          "tech_stack": {
+            "items": [
+              {
+                "name": "HTML / CSS",
+                "role": "Standalone snippets, layout and motion"
+              },
+              {
+                "name": "JavaScript / Web APIs",
+                "role": "Native interactions and library controls"
+              },
+              {
+                "name": "CSS Custom Properties",
+                "role": "Light/dark themes and porting color variables"
+              },
+              {
+                "name": "Node.js standard library",
+                "role": "Reads, validates and builds a single-file gallery"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Official purpose and run instructions",
+                "url": "https://github.com/Seokwoooo/lucian-uxui-prompt/blob/7e339faa1cc5e87496cb7ce556a5b22aadbe76f8/README.md"
+              },
+              {
+                "label": "Zero-dependency build script",
+                "url": "https://github.com/Seokwoooo/lucian-uxui-prompt/blob/7e339faa1cc5e87496cb7ce556a5b22aadbe76f8/src/build.mjs"
+              },
+              {
+                "label": "Light and dark theme variables",
+                "url": "https://github.com/Seokwoooo/lucian-uxui-prompt/blob/7e339faa1cc5e87496cb7ce556a5b22aadbe76f8/src/tokens.css"
+              }
+            ],
+            "verified_at": "2026-10-17T12:57:37-07:00",
+            "note": "No React/Vue or npm dependencies; Node builds the 400 snippets into one HTML file. The agent skill lives in a separate related repository and is not counted as part of this project, nor is the model you use."
+          }
+        }
+      ]
+    },
+    {
+      "day": "2026-10-16",
+      "updated_at": "2026-10-16T20:00:39-07:00",
+      "projects": [
+        {
+          "name": "Diagram Design",
+          "repo": "cathrynlavery/diagram-design",
+          "topic": "ai",
+          "event": "new",
+          "tags": [
+            "SVG",
+            "Agent Skills"
+          ],
+          "title": "Turn explanations into editable HTML and SVG diagrams",
+          "summary": "A diagram design skill for coding agents, with references for diagram types, semantics, layout and style.",
+          "reason": "Diagrams come out as editable HTML and SVG instead of images, so they stay changeable inside your own pages; a good fit for agents that already write your docs.",
+          "verdict": "try",
+          "effort": "low",
+          "platforms": [
+            "Web"
+          ],
+          "use_case": "Explain workflows, mechanisms and decision branches; the resulting SVG can go straight into a web page or be edited further.",
+          "requirements": "Generating new diagrams needs a coding agent that can read the skill; no account, API or extra install.",
+          "assessment": "A flowchart produced by the real skill was checked for display, path switching and SVG source, which is enough to judge whether its style and output suit your pages.",
+          "caution": "Only one skill output was checked; the full range of diagram types and complex layouts was not tested systematically.",
+          "license": {
+            "name": "MIT",
+            "kind": "open-source",
+            "url": "https://github.com/cathrynlavery/diagram-design/blob/b46c9701f035844a20b13ab0551315977188933b/LICENSE"
+          },
+          "stars": {
+            "count": 56136,
+            "observed_at": "2026-10-16T02:30:47.459220-07:00",
+            "approximate": false
+          },
+          "sources": [
+            {
+              "label": "Official repository and star snapshot",
+              "url": "https://github.com/cathrynlavery/diagram-design",
+              "observed_at": "2026-10-16T02:30:47.459220-07:00"
+            },
+            {
+              "label": "Pinned skill version used",
+              "url": "https://github.com/cathrynlavery/diagram-design/blob/b46c9701f035844a20b13ab0551315977188933b/SKILL.md"
+            }
+          ],
+          "tech_stack": {
+            "items": [
+              {
+                "name": "Agent Skills / Markdown",
+                "role": "Diagram rules and references"
+              },
+              {
+                "name": "HTML / SVG",
+                "role": "Diagram delivery and vector drawing"
+              },
+              {
+                "name": "CSS",
+                "role": "Visual style and typography"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Official diagram skill",
+                "url": "https://github.com/cathrynlavery/diagram-design/blob/main/skills/diagram-design/SKILL.md"
+              }
+            ],
+            "note": "Mostly executable skill instructions and references, not a React component library or a drawing library.",
+            "verified_at": "2026-10-16T05:51:06-07:00"
+          }
+        },
+        {
+          "name": "Hyperframes",
+          "repo": "heygen-com/hyperframes",
+          "topic": "ai",
+          "event": "new",
+          "tags": [
+            "HTML video",
+            "Timeline"
+          ],
+          "title": "Turn HTML content into short videos you can edit and seek",
+          "summary": "Organizes video content with HTML, CSS, media and seekable animation, driven by the official runtime.",
+          "reason": "A real timeline you can play and seek in the browser, a practical way to explore code-generated short videos.",
+          "verdict": "try",
+          "effort": "low",
+          "platforms": [
+            "Web"
+          ],
+          "use_case": "Product intros, social clips and parameterized motion; check copy, colors and timeline frames in the browser first.",
+          "requirements": "Browser preview needs no account, API or extra install. Full video export needs the project's render and encoding toolchain, which was not installed or verified.",
+          "assessment": "Play, pause, seeking back and forth, and title and color changes were verified with the official runtime. A good starting point for editable short videos; this does not show that the MP4 export path works.",
+          "caution": "Only the browser preview was verified; MP4, audio, AI generation and cloud rendering were not. GSAP has its own Standard License, kept as is, and is not labelled Apache/MIT.",
+          "license": {
+            "name": "Apache-2.0 (Hyperframes)",
+            "kind": "open-source",
+            "url": "https://github.com/heygen-com/hyperframes/blob/4d6b5be33bda39c5f4572fbe383a3f5f6e68e315/LICENSE"
+          },
+          "stars": {
+            "count": 64883,
+            "observed_at": "2026-10-16T02:49:21.150792-07:00",
+            "approximate": false
+          },
+          "sources": [
+            {
+              "label": "Official repository and star snapshot",
+              "url": "https://github.com/heygen-com/hyperframes",
+              "observed_at": "2026-10-16T02:49:21.150792-07:00"
+            },
+            {
+              "label": "Pinned runtime code",
+              "url": "https://github.com/heygen-com/hyperframes/tree/4d6b5be33bda39c5f4572fbe383a3f5f6e68e315"
+            },
+            {
+              "label": "Official npm package build provenance",
+              "url": "https://registry.npmjs.org/-/npm/v1/attestations/@hyperframes%2fcore@0.8.164"
+            }
+          ],
+          "tech_stack": {
+            "items": [
+              {
+                "name": "TypeScript / Node.js",
+                "role": "Framework and CLI"
+              },
+              {
+                "name": "HTML / CSS",
+                "role": "Video frames"
+              },
+              {
+                "name": "GSAP",
+                "role": "Seekable animation"
+              },
+              {
+                "name": "Puppeteer",
+                "role": "Browser rendering"
+              },
+              {
+                "name": "FFmpeg",
+                "role": "Video encoding pipeline"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Core package dependencies",
+                "url": "https://github.com/heygen-com/hyperframes/blob/main/packages/core/package.json"
+              },
+              {
+                "label": "CLI dependencies",
+                "url": "https://github.com/heygen-com/hyperframes/blob/main/packages/cli/package.json"
+              },
+              {
+                "label": "Official framework overview",
+                "url": "https://github.com/heygen-com/hyperframes/blob/main/README.md"
+              }
+            ],
+            "note": "This is the full project's render and encoding stack; FFmpeg export was not verified.",
+            "verified_at": "2026-10-16T05:51:06-07:00"
+          }
+        },
+        {
+          "name": "Anatomy",
+          "repo": "wheresryan22/anatomy",
+          "topic": "ai",
+          "event": "new",
+          "tags": [
+            "SVG",
+            "Interactive diagrams"
+          ],
+          "title": "Mechanical structures as SVG you can operate and read",
+          "summary": "An interactive diagram skill and SVG geometry kit for coding agents; the official gauge example links the carriage, probe, needle and readout.",
+          "reason": "The official example shows what an operable explanatory diagram looks like, a quick way to judge whether this format suits your site.",
+          "verdict": "try",
+          "effort": "low",
+          "platforms": [
+            "Web"
+          ],
+          "use_case": "Build operable diagrams for product principles, mechanisms and complex systems, after checking that this delivery format fits your site.",
+          "requirements": "Generating new illustrations with the drawing kit means reading the skill and running its local build scripts; no account, model or network needed to view the examples.",
+          "assessment": "Gauge block switching, keyboard reset, the auto tour, and the link between SVG geometry and the needle were verified; directly useful as a reference for interactive explanations.",
+          "caution": "Only the official example and the SVG library were run; arbitrary prompt generation, WebGL/3D, the full drawing feature set and real measurement accuracy were not verified. px are the example's drawing units.",
+          "license": {
+            "name": "MIT",
+            "kind": "open-source",
+            "url": "https://github.com/wheresryan22/anatomy/blob/e9488296a44211c42701ff71705b7901470ec78f/LICENSE"
+          },
+          "stars": {
+            "count": 13411,
+            "observed_at": "2026-10-16T02:49:24.028742-07:00",
+            "approximate": false
+          },
+          "sources": [
+            {
+              "label": "Official repository and star snapshot",
+              "url": "https://github.com/wheresryan22/anatomy",
+              "observed_at": "2026-10-16T02:49:24.028742-07:00"
+            },
+            {
+              "label": "Pinned version used",
+              "url": "https://github.com/wheresryan22/anatomy/tree/e9488296a44211c42701ff71705b7901470ec78f"
+            }
+          ],
+          "tech_stack": {
+            "items": [
+              {
+                "name": "Agent Skills / Markdown",
+                "role": "Interactive diagram instructions"
+              },
+              {
+                "name": "JavaScript / Node.js",
+                "role": "Composition scripts and geometry library"
+              },
+              {
+                "name": "SVG",
+                "role": "Vector graphics"
+              },
+              {
+                "name": "WebGL",
+                "role": "Shading in some examples"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Official overview and layers",
+                "url": "https://github.com/wheresryan22/anatomy/blob/main/README.md"
+              },
+              {
+                "label": "Actual geometry library",
+                "url": "https://github.com/wheresryan22/anatomy/blob/main/kit/iso-kit.mjs"
+              }
+            ],
+            "note": "The core kit uses built-in Node modules; WebGL is an optional effect in some examples and is not used by the gauge example.",
+            "verified_at": "2026-10-16T05:51:06-07:00"
+          }
+        },
+        {
+          "repo": "chenglou/handwired",
+          "name": "Handwired",
+          "topic": "ai",
+          "event": "new",
+          "tags": [
+            "Numeric circuits",
+            "TypeScript",
+            "CPU / WebGPU"
+          ],
+          "title": "Build runnable numeric networks in JavaScript, turning branches and state into circuits",
+          "summary": "A JavaScript builder organizes arithmetic, comparison, selection and state into FP32 numeric circuits, executed by the official CPU runtime; some JSON search examples use WebGPU.",
+          "reason": "Made public on October 14 at 19:15 Los Angeles time, with a Circuit builder, compiler, interpreter and interactive examples. It shows a new experimental direction, program logic as a differentiable numeric network; it does not convert arbitrary existing JavaScript.",
+          "verdict": "try",
+          "effort": "medium",
+          "platforms": [
+            "Web",
+            "JavaScript / TypeScript",
+            "Bun"
+          ],
+          "use_case": "Understand how numeric circuits encode comparisons, branches and state; try differentiable programs and small interactions, not a replacement for business JavaScript or a way to train large models.",
+          "requirements": "The official project uses Bun (docs test 1.4.3). The CPU path needs no model, account or GPU; the GPU JSON search example needs a browser with WebGPU.",
+          "assessment": "Worth trying the smallest CPU branch experiment first to see whether circuit execution matches the reference JavaScript. A research project; the author's precision and performance claims do not generalize to every program.",
+          "caution": "The official docs say there is no tool that converts existing JS into a network; you write the builder. Execution is bound by FP32 precision, declared value ranges and fixed workloads. WebGPU performance, training and production readiness were not verified.",
+          "license": {
+            "name": "MIT",
+            "kind": "open-source",
+            "url": "https://github.com/chenglou/handwired/blob/4ea7fcb27ebe93acf49b9f29a93e162b975bad46/LICENSE"
+          },
+          "stars": {
+            "count": 1415,
+            "observed_at": "2026-10-16T07:59:21-07:00",
+            "approximate": false
+          },
+          "sources": [
+            {
+              "label": "Official repository: stars at collection and source",
+              "url": "https://github.com/chenglou/handwired",
+              "observed_at": "2026-10-16T07:59:21-07:00"
+            },
+            {
+              "label": "Official execution limits and how to run",
+              "url": "https://github.com/chenglou/handwired/blob/4ea7fcb27ebe93acf49b9f29a93e162b975bad46/docs/README.md",
+              "observed_at": "2026-10-16T07:59:21-07:00"
+            },
+            {
+              "label": "Dependencies and build scripts",
+              "url": "https://github.com/chenglou/handwired/blob/4ea7fcb27ebe93acf49b9f29a93e162b975bad46/package.json",
+              "observed_at": "2026-10-16T07:59:21-07:00"
+            },
+            {
+              "label": "License",
+              "url": "https://github.com/chenglou/handwired/blob/4ea7fcb27ebe93acf49b9f29a93e162b975bad46/LICENSE",
+              "observed_at": "2026-10-16T07:59:21-07:00"
+            }
+          ],
+          "tech_stack": {
+            "items": [
+              {
+                "name": "TypeScript / JavaScript",
+                "role": "Circuit builder and executor"
+              },
+              {
+                "name": "FP32 / ReGLU",
+                "role": "Numeric network operations"
+              },
+              {
+                "name": "Bun",
+                "role": "Official development and build"
+              },
+              {
+                "name": "WebGPU",
+                "role": "Some JSON search examples"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Official execution limits and how to run",
+                "url": "https://github.com/chenglou/handwired/blob/4ea7fcb27ebe93acf49b9f29a93e162b975bad46/docs/README.md"
+              },
+              {
+                "label": "Dependencies and build scripts",
+                "url": "https://github.com/chenglou/handwired/blob/4ea7fcb27ebe93acf49b9f29a93e162b975bad46/package.json"
+              },
+              {
+                "label": "License",
+                "url": "https://github.com/chenglou/handwired/blob/4ea7fcb27ebe93acf49b9f29a93e162b975bad46/LICENSE"
+              }
+            ],
+            "verified_at": "2026-10-16T07:59:21-07:00",
+            "note": "Based on the official docs and package.json. WebGPU is used only in some examples and is not needed on the CPU path. FP32 / ReGLU describe the arithmetic, not a dependency on a large deep learning framework."
+          }
+        },
+        {
+          "repo": "feder-cr/git-ai",
+          "name": "gitai",
+          "topic": "ai",
+          "event": "new",
+          "tags": [
+            "Multi-agent collaboration",
+            "Version control",
+            "Go"
+          ],
+          "title": "Move multi-agent code landing, conflicts and history queries onto a Git server",
+          "summary": "A Git-compatible service built on Gitaly plus the graft CLI: on-demand reads, server-side history queries, concurrent landing, a change log and per-agent access policies.",
+          "reason": "Made public on October 15 at 06:12 Los Angeles time as a first 0.1.0 release, aimed at many short-lived agent tasks changing branches at once. An independent implementation, not the public code of Anthropic's internal Scion.",
+          "verdict": "observe",
+          "effort": "high",
+          "platforms": [
+            "macOS",
+            "Linux"
+          ],
+          "use_case": "Research server-side landing, on-demand workspaces and change streams when several coding agents already work on one repository. Better as an infrastructure experiment than an immediate move for a small personal front-end project.",
+          "requirements": "The official quick start needs Go 1.26, a C toolchain, Meson and Ninja, to build the bundled Git and run a local service. The storage core can use SQLite/PostgreSQL and file or object storage; the server itself calls no model.",
+          "assessment": "Keep an eye on it. The code and quick start can be checked, but no build, concurrency, crash or permission test was run; a README claiming thorough tests is no proof of maturity.",
+          "caution": "A community project built on Gitaly, not affiliated with Anthropic, and it does not reproduce internal Scion details. No web UI, issues or full CI product yet; 0.1.0 interfaces may change. Access policies depend on correct local configuration.",
+          "license": {
+            "name": "MIT (repository code; third-party licenses in NOTICE)",
+            "kind": "open-source",
+            "url": "https://github.com/feder-cr/git-ai/blob/7987316475266d23e4046d9cb39985bc89d77928/LICENSE"
+          },
+          "stars": {
+            "count": 1035,
+            "observed_at": "2026-10-16T07:59:22-07:00",
+            "approximate": false
+          },
+          "sources": [
+            {
+              "label": "Official repository: stars at collection and source",
+              "url": "https://github.com/feder-cr/git-ai",
+              "observed_at": "2026-10-16T07:59:22-07:00"
+            },
+            {
+              "label": "Official architecture and quick start",
+              "url": "https://github.com/feder-cr/git-ai/blob/7987316475266d23e4046d9cb39985bc89d77928/README.md",
+              "observed_at": "2026-10-16T07:59:22-07:00"
+            },
+            {
+              "label": "Actual module dependencies",
+              "url": "https://github.com/feder-cr/git-ai/blob/7987316475266d23e4046d9cb39985bc89d77928/go.mod",
+              "observed_at": "2026-10-16T07:59:22-07:00"
+            },
+            {
+              "label": "Storage core and defaults",
+              "url": "https://github.com/feder-cr/git-ai/blob/7987316475266d23e4046d9cb39985bc89d77928/doc/graft/STORAGE.md",
+              "observed_at": "2026-10-16T07:59:22-07:00"
+            },
+            {
+              "label": "Current limits",
+              "url": "https://github.com/feder-cr/git-ai/blob/7987316475266d23e4046d9cb39985bc89d77928/doc/graft/LIMITATIONS.md",
+              "observed_at": "2026-10-16T07:59:22-07:00"
+            },
+            {
+              "label": "License",
+              "url": "https://github.com/feder-cr/git-ai/blob/7987316475266d23e4046d9cb39985bc89d77928/LICENSE",
+              "observed_at": "2026-10-16T07:59:22-07:00"
+            }
+          ],
+          "tech_stack": {
+            "items": [
+              {
+                "name": "Go 1.26",
+                "role": "Server, CLI and SDK"
+              },
+              {
+                "name": "gRPC / Protobuf",
+                "role": "Client-server communication"
+              },
+              {
+                "name": "Git / Gitaly",
+                "role": "Repository objects and refs"
+              },
+              {
+                "name": "SQLite / PostgreSQL",
+                "role": "Optional storage core"
+              },
+              {
+                "name": "File / object storage",
+                "role": "Optional Git pack storage"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Official architecture and quick start",
+                "url": "https://github.com/feder-cr/git-ai/blob/7987316475266d23e4046d9cb39985bc89d77928/README.md"
+              },
+              {
+                "label": "Actual module dependencies",
+                "url": "https://github.com/feder-cr/git-ai/blob/7987316475266d23e4046d9cb39985bc89d77928/go.mod"
+              },
+              {
+                "label": "Storage core and defaults",
+                "url": "https://github.com/feder-cr/git-ai/blob/7987316475266d23e4046d9cb39985bc89d77928/doc/graft/STORAGE.md"
+              }
+            ],
+            "verified_at": "2026-10-16T07:59:22-07:00",
+            "note": "The official storage core is off by default; databases and object storage are optional. No ee/ directory at the root; LICENSE applies MIT to the rest of the code, with dependencies listed in NOTICE. No model API is a required part."
+          }
+        },
+        {
+          "repo": "datalab-to/indra",
+          "name": "Indra OCR",
+          "topic": "ai",
+          "event": "new",
+          "tags": [
+            "CPU OCR",
+            "Local documents",
+            "Restricted model license"
+          ],
+          "title": "Turn scanned pages and PDFs into reading-order Markdown without a GPU",
+          "summary": "A local CPU document recognition pipeline combining line detection, text recognition, layout blocks and reading order, with Markdown, text or JSON output and a local viewer.",
+          "reason": "Made public on October 13 at 04:07 Los Angeles time; source version 0.3.2. Compared with large vision models it offers a roughly 18 MB first model download and a local path without PyTorch, interesting for lightweight document processing.",
+          "verdict": "watch",
+          "effort": "medium",
+          "platforms": [
+            "Python 3.10+",
+            "Linux",
+            "macOS Apple Silicon"
+          ],
+          "use_case": "A lightweight text entry point for personal documents, clean scans and digital PDFs that can feed retrieval or agent workflows; check accuracy on your own representative pages first.",
+          "requirements": "Python 3.10+ with ONNX Runtime, OpenCV, pypdfium2 and NumPy; about 18 MB of models download from Hugging Face on first run, no GPU or paid API. Some math options add models and time.",
+          "assessment": "Watch the small-model CPU approach closely. Only the source, dependencies and license were checked; OCR was not run locally. The author's benchmarks are not independent, so no promise that it is faster or more accurate than other tools.",
+          "caution": "The code is Apache-2.0, but the models use a modified OpenRAIL-M with competitive-use and commercial-scale restrictions, so the whole setup is not unconditionally open source. The official docs note clear limits on complex tables, handwriting, poor scans and some languages.",
+          "license": {
+            "name": "Apache-2.0 (code); modified OpenRAIL-M (models, restricted)",
+            "kind": "source-available",
+            "url": "https://huggingface.co/datalab-to/indra-ocr/blob/main/LICENSE"
+          },
+          "stars": {
+            "count": 389,
+            "observed_at": "2026-10-16T07:59:22-07:00",
+            "approximate": false
+          },
+          "sources": [
+            {
+              "label": "Official repository: stars at collection and source",
+              "url": "https://github.com/datalab-to/indra",
+              "observed_at": "2026-10-16T07:59:22-07:00"
+            },
+            {
+              "label": "Official run instructions and limits",
+              "url": "https://github.com/datalab-to/indra/blob/3d773aeedc5d79d1d0a2a04007a9075cd71a59f4/README.md",
+              "observed_at": "2026-10-16T07:59:22-07:00"
+            },
+            {
+              "label": "Actual dependencies and versions",
+              "url": "https://github.com/datalab-to/indra/blob/3d773aeedc5d79d1d0a2a04007a9075cd71a59f4/pyproject.toml",
+              "observed_at": "2026-10-16T07:59:22-07:00"
+            },
+            {
+              "label": "Code license",
+              "url": "https://github.com/datalab-to/indra/blob/3d773aeedc5d79d1d0a2a04007a9075cd71a59f4/LICENSE",
+              "observed_at": "2026-10-16T07:59:22-07:00"
+            },
+            {
+              "label": "Model weight license and commercial limits",
+              "url": "https://huggingface.co/datalab-to/indra-ocr/blob/main/LICENSE",
+              "observed_at": "2026-10-16T07:59:22-07:00"
+            }
+          ],
+          "tech_stack": {
+            "items": [
+              {
+                "name": "Python",
+                "role": "OCR pipeline and CLI"
+              },
+              {
+                "name": "ONNX Runtime",
+                "role": "CPU model inference"
+              },
+              {
+                "name": "OpenCV / NumPy",
+                "role": "Image processing and arrays"
+              },
+              {
+                "name": "pypdfium2",
+                "role": "PDF pages and text layer"
+              },
+              {
+                "name": "Hugging Face Hub",
+                "role": "First-run model download"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Official run instructions and limits",
+                "url": "https://github.com/datalab-to/indra/blob/3d773aeedc5d79d1d0a2a04007a9075cd71a59f4/README.md"
+              },
+              {
+                "label": "Actual dependencies and versions",
+                "url": "https://github.com/datalab-to/indra/blob/3d773aeedc5d79d1d0a2a04007a9075cd71a59f4/pyproject.toml"
+              },
+              {
+                "label": "Code license",
+                "url": "https://github.com/datalab-to/indra/blob/3d773aeedc5d79d1d0a2a04007a9075cd71a59f4/LICENSE"
+              }
+            ],
+            "verified_at": "2026-10-16T07:59:22-07:00",
+            "note": "Core stack from pyproject.toml and the README. The code is OSI open source; the models it needs carry extra use and commercial conditions, so the card is labelled as a setup with restricted weights."
+          }
+        },
+        {
+          "repo": "ndop-ui/ui",
+          "name": "Ndop UI",
+          "topic": "ai",
+          "event": "new",
+          "tags": [
+            "Angular",
+            "Component updates",
+            "Three-way merge"
+          ],
+          "title": "Keep component source in your own project and still pick up upstream updates",
+          "summary": "Signals-based Angular components with a source registry and CLI. Components are copied into your project and owned by you; the update core uses three-way merges to reconcile local edits with upstream patches.",
+          "reason": "Shown on Show HN on October 16 at 08:21 Los Angeles time. Beyond copying components, it tackles \"how do I upgrade after editing the code\". Only 2 stars at collection: an early find, not a verified trend. The CLI/merge package is at 1.1.0; the README's 1.0.0 is out of date.",
+          "verdict": "try",
+          "effort": "medium",
+          "platforms": [
+            "Angular 21 / 22",
+            "Node.js 22.12+",
+            "Web"
+          ],
+          "use_case": "Angular projects that use a copy-in design system and want to keep local style and behavior changes while picking upstream fixes. Try the clean-merge and conflict flow on a small component first.",
+          "requirements": "Using the components needs Angular 21 or 22 and the Angular CDK; the CLI needs Node.js >=22.12. The repository uses pnpm / Nx for development; a minimal merge experiment needs no full Angular app.",
+          "assessment": "Worth trying. The real update core was exercised for clean merges, patch selection and conflict handling against the official Button fixture. Full Angular components, CLI install, code types and app-level upgrades were not verified.",
+          "caution": "Very early with very little attention. Three-way text merges do not guarantee correct business semantics, and generated components have not passed app tests. The theme derives from shadcn/ui; fonts, icons and similar assets follow their own licenses.",
+          "license": {
+            "name": "MIT (code); bundled assets have their own licenses",
+            "kind": "open-source",
+            "url": "https://github.com/ndop-ui/ui/blob/bda52141e0686f882c6151b6a92eb365660a85ad/LICENSE"
+          },
+          "stars": {
+            "count": 2,
+            "observed_at": "2026-10-16T13:05:41-07:00",
+            "approximate": false
+          },
+          "sources": [
+            {
+              "label": "Official repository and star count at collection",
+              "url": "https://github.com/ndop-ui/ui",
+              "observed_at": "2026-10-16T13:05:41-07:00"
+            },
+            {
+              "label": "Official purpose and how to run",
+              "url": "https://github.com/ndop-ui/ui/blob/bda52141e0686f882c6151b6a92eb365660a85ad/README.md",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            },
+            {
+              "label": "CLI dependencies and Node requirement",
+              "url": "https://github.com/ndop-ui/ui/blob/bda52141e0686f882c6151b6a92eb365660a85ad/packages/cli/package.json",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            },
+            {
+              "label": "Merge core dependencies",
+              "url": "https://github.com/ndop-ui/ui/blob/bda52141e0686f882c6151b6a92eb365660a85ad/packages/merge/package.json",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            },
+            {
+              "label": "Component runtime dependencies",
+              "url": "https://github.com/ndop-ui/ui/blob/bda52141e0686f882c6151b6a92eb365660a85ad/packages/primitives/package.json",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            },
+            {
+              "label": "License",
+              "url": "https://github.com/ndop-ui/ui/blob/bda52141e0686f882c6151b6a92eb365660a85ad/LICENSE",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            },
+            {
+              "label": "Show HN introduction, October 16",
+              "url": "https://news.ycombinator.com/item?id=50119538",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            }
+          ],
+          "tech_stack": {
+            "items": [
+              {
+                "name": "TypeScript / Angular Signals",
+                "role": "Components and reactive state"
+              },
+              {
+                "name": "Angular CDK",
+                "role": "Focus, overlays and keyboard behavior"
+              },
+              {
+                "name": "Tailwind CSS",
+                "role": "Styling and themes"
+              },
+              {
+                "name": "Node.js / TypeScript",
+                "role": "CLI and source registry tooling"
+              },
+              {
+                "name": "node-diff3",
+                "role": "Three-way merge and conflict detection"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Official purpose and how to run",
+                "url": "https://github.com/ndop-ui/ui/blob/bda52141e0686f882c6151b6a92eb365660a85ad/README.md"
+              },
+              {
+                "label": "CLI dependencies and Node requirement",
+                "url": "https://github.com/ndop-ui/ui/blob/bda52141e0686f882c6151b6a92eb365660a85ad/packages/cli/package.json"
+              },
+              {
+                "label": "Merge core dependencies",
+                "url": "https://github.com/ndop-ui/ui/blob/bda52141e0686f882c6151b6a92eb365660a85ad/packages/merge/package.json"
+              },
+              {
+                "label": "Component runtime dependencies",
+                "url": "https://github.com/ndop-ui/ui/blob/bda52141e0686f882c6151b6a92eb365660a85ad/packages/primitives/package.json"
+              }
+            ],
+            "verified_at": "2026-10-16T13:07:06-07:00",
+            "note": "Angular/CDK is the component runtime; Node.js runs the CLI. node-diff3 belongs to the separate update core; a minimal merge experiment does not load Angular or the docs site."
+          },
+          "heat": {
+            "label": "1 point on Show HN",
+            "window": "Posted October 16 at 08:21, collected at 13:08; early exposure only, not a verified trend",
+            "observed_at": "2026-10-16T13:08:16-07:00",
+            "total_only": false
+          }
+        },
+        {
+          "repo": "Leonxlnx/earshot",
+          "name": "earshot",
+          "topic": "ai",
+          "event": "new",
+          "tags": [
+            "Audio analysis",
+            "MCP",
+            "CPU",
+            "Video sound"
+          ],
+          "title": "Let coding agents check the sound in the videos they generate",
+          "summary": "Local tools for audio description, text matching, segment location, timelines, loudness and peak measurement, and sound effect synthesis, usable from Python, a CLI or MCP.",
+          "reason": "First public release v0.1.0 on October 15 at 16:04 Los Angeles time. It extends video generation workflows: beyond making the picture, agents get evidence about sound matching, timing and levels. Star growth not verified.",
+          "verdict": "watch",
+          "effort": "medium",
+          "platforms": [
+            "Python 3.10+",
+            "CPU",
+            "ffmpeg / ffprobe"
+          ],
+          "use_case": "Check sound effect placement, loudness and asset matching in code-generated clips; pick the candidate sound closest to a description, or analyse timeline cut points.",
+          "requirements": "Python 3.10+ with ffmpeg/ffprobe. Full semantic features rely on CPU PyTorch/Transformers with about 1.4 GB of models on first run; pure measurement commands use no model. MCP can keep models loaded; the optional Gemini review needs an account and upload consent.",
+          "assessment": "Watch its \"checkable sound evidence\" closely, especially as an add-on to video generation workflows. Not installed or run yet; CPU-only does not mean lightweight, so check run time and judgements on real material first.",
+          "caution": "The source marks itself Alpha. The author's match rates, authenticity scores and blind tests were not independently checked; the tools cannot judge musical taste, emotion, copyright origin or speech content. A scoring profile from a few professional clips does not represent general taste. The optional cloud review was not used.",
+          "license": {
+            "name": "MIT (code); CLAP Apache-2.0 / AST BSD-3-Clause (models)",
+            "kind": "open-source",
+            "url": "https://github.com/Leonxlnx/earshot/blob/108763c62648c78dbac14f5bebcd3c61ac7931cd/LICENSE"
+          },
+          "stars": {
+            "count": 286,
+            "observed_at": "2026-10-16T13:05:42-07:00",
+            "approximate": false
+          },
+          "sources": [
+            {
+              "label": "Official repository and star count at collection",
+              "url": "https://github.com/Leonxlnx/earshot",
+              "observed_at": "2026-10-16T13:05:42-07:00"
+            },
+            {
+              "label": "Official purpose, requirements and scope",
+              "url": "https://github.com/Leonxlnx/earshot/blob/108763c62648c78dbac14f5bebcd3c61ac7931cd/README.md",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            },
+            {
+              "label": "Dependencies, Alpha status and version",
+              "url": "https://github.com/Leonxlnx/earshot/blob/108763c62648c78dbac14f5bebcd3c61ac7931cd/pyproject.toml",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            },
+            {
+              "label": "Limits listed by the author",
+              "url": "https://github.com/Leonxlnx/earshot/blob/108763c62648c78dbac14f5bebcd3c61ac7931cd/docs/LIMITS.md",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            },
+            {
+              "label": "Code license",
+              "url": "https://github.com/Leonxlnx/earshot/blob/108763c62648c78dbac14f5bebcd3c61ac7931cd/LICENSE",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            },
+            {
+              "label": "First public release v0.1.0",
+              "url": "https://github.com/Leonxlnx/earshot/releases/tag/v0.1.0",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            },
+            {
+              "label": "CLAP model license",
+              "url": "https://huggingface.co/laion/larger_clap_general",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            },
+            {
+              "label": "AST model license",
+              "url": "https://huggingface.co/MIT/ast-finetuned-audioset-10-10-0.4593",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            }
+          ],
+          "tech_stack": {
+            "items": [
+              {
+                "name": "Python / NumPy / SciPy",
+                "role": "Audio pipeline and signal processing"
+              },
+              {
+                "name": "PyTorch / Transformers",
+                "role": "CPU model inference"
+              },
+              {
+                "name": "CLAP / AST",
+                "role": "Text-audio matching and event tags"
+              },
+              {
+                "name": "librosa / pyloudnorm",
+                "role": "Spectrum, rhythm and loudness measurement"
+              },
+              {
+                "name": "ffmpeg / ffprobe",
+                "role": "Media decoding and timing"
+              },
+              {
+                "name": "MCP",
+                "role": "Optional agent tool server"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Official purpose, requirements and scope",
+                "url": "https://github.com/Leonxlnx/earshot/blob/108763c62648c78dbac14f5bebcd3c61ac7931cd/README.md"
+              },
+              {
+                "label": "Dependencies, Alpha status and version",
+                "url": "https://github.com/Leonxlnx/earshot/blob/108763c62648c78dbac14f5bebcd3c61ac7931cd/pyproject.toml"
+              },
+              {
+                "label": "Limits listed by the author",
+                "url": "https://github.com/Leonxlnx/earshot/blob/108763c62648c78dbac14f5bebcd3c61ac7931cd/docs/LIMITS.md"
+              },
+              {
+                "label": "Code license",
+                "url": "https://github.com/Leonxlnx/earshot/blob/108763c62648c78dbac14f5bebcd3c61ac7931cd/LICENSE"
+              }
+            ],
+            "verified_at": "2026-10-16T13:07:06-07:00",
+            "note": "Runs mostly on the local CPU; MCP is an optional tool server. The Gemini upload review is an optional external feature, not required to run. Both model licenses were checked in the author's Hugging Face model metadata."
+          }
+        },
+        {
+          "repo": "Tencent-Hunyuan/Hy-Memory",
+          "name": "Hy Memory / MemHub",
+          "topic": "ai",
+          "event": "new",
+          "tags": [
+            "Cross-agent memory",
+            "Local first",
+            "Python SDK"
+          ],
+          "title": "Organize chat facts, task experience and code evolution into searchable memory",
+          "summary": "The Hy Memory Python SDK handles chat, work and coding memory separately; MemHub in the same repository adds a local runtime, CLI and desktop manager so several AI apps, each authorized separately, can reuse memory.",
+          "reason": "Made public on October 15 Los Angeles time; MemHub v1.0.2 shipped on October 16 at 11:49, with the SDK at 2.0.2. It tries to keep both task experience and code version history, close to what long-running multi-agent coding needs.",
+          "verdict": "watch",
+          "effort": "medium",
+          "platforms": [
+            "Python SDK",
+            "MemHub: macOS / Linux"
+          ],
+          "use_case": "Reuse confirmed engineering experience across coding agents, or look up earlier implementation changes by repository and branch. Test fact conflicts, deletion and source isolation with a small synthetic sample first.",
+          "requirements": "The SDK needs Python >=3.9 and usually a compatible embedding endpoint; extraction in pro/ultra needs an LLM configured too. MemHub has its own runtime and optional built-in embeddings; development needs Python 3.12, Node.js 24, pnpm 11 and uv. Supported platforms follow the release manifest; Windows is not supported yet.",
+          "assessment": "Watch the memory layering, version history chains and per-app authorization closely. Only code, dependencies and release records were checked; no real conversations, storage or deletion tests, or recall quality checks were run.",
+          "caution": "\"Production-grade\" and the paper and benchmark results are the authors' claims, not verified locally. Local first does not mean every mode is fully offline; check the data flow when configuring an external LLM or embeddings. SDK and MemHub are different layers; the desktop requirements are not the SDK's minimum.",
+          "license": {
+            "name": "Apache-2.0 (public repository code)",
+            "kind": "open-source",
+            "url": "https://github.com/Tencent-Hunyuan/Hy-Memory/blob/f79770cdb098534d2444178347ad5adc7c473135/LICENSE"
+          },
+          "stars": {
+            "count": 299,
+            "observed_at": "2026-10-16T13:05:41-07:00",
+            "approximate": false
+          },
+          "sources": [
+            {
+              "label": "Official repository and star count at collection",
+              "url": "https://github.com/Tencent-Hunyuan/Hy-Memory",
+              "observed_at": "2026-10-16T13:05:41-07:00"
+            },
+            {
+              "label": "SDK run modes and architecture",
+              "url": "https://github.com/Tencent-Hunyuan/Hy-Memory/blob/f79770cdb098534d2444178347ad5adc7c473135/README.md",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            },
+            {
+              "label": "SDK dependencies",
+              "url": "https://github.com/Tencent-Hunyuan/Hy-Memory/blob/f79770cdb098534d2444178347ad5adc7c473135/pyproject.toml",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            },
+            {
+              "label": "MemHub platforms and runtime contract",
+              "url": "https://github.com/Tencent-Hunyuan/Hy-Memory/blob/f79770cdb098534d2444178347ad5adc7c473135/memhub/README.md",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            },
+            {
+              "label": "MemHub Core dependencies",
+              "url": "https://github.com/Tencent-Hunyuan/Hy-Memory/blob/f79770cdb098534d2444178347ad5adc7c473135/memhub/apps/core/pyproject.toml",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            },
+            {
+              "label": "MemHub Web dependencies",
+              "url": "https://github.com/Tencent-Hunyuan/Hy-Memory/blob/f79770cdb098534d2444178347ad5adc7c473135/memhub/apps/web/package.json",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            },
+            {
+              "label": "License",
+              "url": "https://github.com/Tencent-Hunyuan/Hy-Memory/blob/f79770cdb098534d2444178347ad5adc7c473135/LICENSE",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            },
+            {
+              "label": "MemHub v1.0.2 release",
+              "url": "https://github.com/Tencent-Hunyuan/Hy-Memory/releases/tag/v1.0.2",
+              "observed_at": "2026-10-16T13:07:06-07:00"
+            }
+          ],
+          "tech_stack": {
+            "items": [
+              {
+                "name": "Python / Pydantic",
+                "role": "Memory SDK and data structures"
+              },
+              {
+                "name": "ChromaDB / Kuzu",
+                "role": "Vector index and graph memory"
+              },
+              {
+                "name": "FastAPI / SQLite",
+                "role": "MemHub local service and storage"
+              },
+              {
+                "name": "ONNX Runtime",
+                "role": "MemHub built-in embedding inference"
+              },
+              {
+                "name": "React / TypeScript",
+                "role": "MemHub management UI"
+              },
+              {
+                "name": "Electron",
+                "role": "MemHub desktop shell"
+              }
+            ],
+            "sources": [
+              {
+                "label": "SDK run modes and architecture",
+                "url": "https://github.com/Tencent-Hunyuan/Hy-Memory/blob/f79770cdb098534d2444178347ad5adc7c473135/README.md"
+              },
+              {
+                "label": "SDK dependencies",
+                "url": "https://github.com/Tencent-Hunyuan/Hy-Memory/blob/f79770cdb098534d2444178347ad5adc7c473135/pyproject.toml"
+              },
+              {
+                "label": "MemHub platforms and runtime contract",
+                "url": "https://github.com/Tencent-Hunyuan/Hy-Memory/blob/f79770cdb098534d2444178347ad5adc7c473135/memhub/README.md"
+              },
+              {
+                "label": "MemHub Core dependencies",
+                "url": "https://github.com/Tencent-Hunyuan/Hy-Memory/blob/f79770cdb098534d2444178347ad5adc7c473135/memhub/apps/core/pyproject.toml"
+              }
+            ],
+            "verified_at": "2026-10-16T13:07:06-07:00",
+            "note": "A multi-module repository. ChromaDB/Kuzu come from the SDK; FastAPI/SQLite, React/Electron and the built-in ONNX embeddings come from MemHub. Graph features depend on the run mode; you do not have to deploy every optional database."
+          }
+        },
+        {
+          "name": "MOSS-Image",
+          "repo": "OpenMOSS/MOSS-Image",
+          "topic": "ai",
+          "event": "new",
+          "tags": [
+            "Image generation",
+            "Typography",
+            "Layout control",
+            "DiT"
+          ],
+          "title": "Control text and element placement in posters and illustrations with words and layout JSON",
+          "summary": "OpenMOSS's image generation project with a 5B DiT backbone, public Base and SFT weights, text rendering and spatial layout prompts, plus a Gradio interface and a ComfyUI plugin.",
+          "reason": "The official README announced the code and Base/SFT weights on October 16; both official model repositories were updated on October 16 at 12:30 Los Angeles time. Worth watching for layout control and Chinese/English typography in web illustrations, posters and explanatory images. No verifiable star growth yet.",
+          "verdict": "watch",
+          "effort": "high",
+          "platforms": [
+            "Python 3.10+",
+            "NVIDIA CUDA",
+            "Gradio / ComfyUI"
+          ],
+          "use_case": "Posters, page illustrations or creative assets that need explicit placement of titles, text blocks and objects. Check text accuracy, layout adherence and generation time on the official examples before adding it to a design workflow.",
+          "requirements": "The official model card requires Python 3.10+ and an NVIDIA CUDA GPU; the source depends on PyTorch >=2.9, Diffusers >=0.38, Transformers >=5.3 and Accelerate. Component offloading and slower layer-by-layer offloading reduce VRAM, with no single minimum guaranteed. Weights must be downloaded; Gradio/ComfyUI are optional.",
+          "assessment": "Watch closely. The inference entry point, real dependencies, code and the official Base/SFT model licenses were checked; weights were not downloaded, inference was not run and image quality was not verified. 5B refers to the DiT backbone; the whole pipeline is not necessarily small or runnable locally.",
+          "caution": "\"Accurate text\", \"high quality\" and \"efficient\" are the authors' descriptions and examples, not independently verified. The public Prompt Enhancer skill only compiles prompts and coordinates and does not generate images; its output is no stand-in for a real model demo. No local inference demo was built, and CUDA runtime requirements were not verified.",
+          "stars": {
+            "count": 229,
+            "observed_at": "2026-10-16T20:00:06-07:00",
+            "approximate": false
+          },
+          "license": {
+            "name": "Apache-2.0 (code and official Base/SFT weight declarations)",
+            "kind": "open-source",
+            "url": "https://github.com/OpenMOSS/MOSS-Image/blob/c1355e6b1986dfe8fba3c0455783a05899212342/LICENSE"
+          },
+          "sources": [
+            {
+              "label": "Official repository and star count at collection",
+              "url": "https://github.com/OpenMOSS/MOSS-Image",
+              "observed_at": "2026-10-16T20:00:06-07:00"
+            },
+            {
+              "label": "Official announcement, layout and VRAM modes",
+              "url": "https://github.com/OpenMOSS/MOSS-Image/blob/c1355e6b1986dfe8fba3c0455783a05899212342/README.md",
+              "observed_at": "2026-10-16T20:00:06-07:00"
+            },
+            {
+              "label": "Actual dependencies and runtime versions",
+              "url": "https://github.com/OpenMOSS/MOSS-Image/blob/c1355e6b1986dfe8fba3c0455783a05899212342/pyproject.toml",
+              "observed_at": "2026-10-16T20:00:06-07:00"
+            },
+            {
+              "label": "Base model, CUDA requirement and license",
+              "url": "https://huggingface.co/OpenMOSS-Team/MOSS-Image-Base/tree/1ceede80badddd6a7812069619edaa5633587192",
+              "observed_at": "2026-10-16T20:00:06-07:00"
+            },
+            {
+              "label": "Official SFT weights and license statement",
+              "url": "https://huggingface.co/OpenMOSS-Team/MOSS-Image-SFT/tree/fc5de0d56fc910cbca6f6625a70f5f582b26deb1",
+              "observed_at": "2026-10-16T20:00:06-07:00"
+            }
+          ],
+          "tech_stack": {
+            "items": [
+              {
+                "name": "Python / PyTorch",
+                "role": "Inference runtime and tensor math"
+              },
+              {
+                "name": "DiT / Diffusers",
+                "role": "Diffusion backbone and generation pipeline"
+              },
+              {
+                "name": "Transformers",
+                "role": "Text encoder loading"
+              },
+              {
+                "name": "Accelerate / CUDA",
+                "role": "GPU execution and memory offloading"
+              },
+              {
+                "name": "Gradio",
+                "role": "Optional local generation UI"
+              },
+              {
+                "name": "ComfyUI plugin",
+                "role": "Optional node workflow integration"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Actual project dependencies",
+                "url": "https://github.com/OpenMOSS/MOSS-Image/blob/c1355e6b1986dfe8fba3c0455783a05899212342/pyproject.toml"
+              },
+              {
+                "label": "Official inference and optional UI",
+                "url": "https://github.com/OpenMOSS/MOSS-Image/blob/c1355e6b1986dfe8fba3c0455783a05899212342/README.md"
+              },
+              {
+                "label": "Runtime entry point",
+                "url": "https://github.com/OpenMOSS/MOSS-Image/blob/c1355e6b1986dfe8fba3c0455783a05899212342/inference_runtime.py"
+              }
+            ],
+            "verified_at": "2026-10-16T20:00:06-07:00",
+            "note": "Gradio is an optional UI dependency and ComfyUI an optional integration; neither has to run. The official pipeline loads weights and custom inference code; this pick was a read-only check, with no model or skill executed."
+          }
+        }
+      ]
+    },
+    {
+      "day": "2026-10-15",
+      "updated_at": "2026-10-16T08:03:13-07:00",
+      "projects": [
+        {
+          "name": "FigCraft",
+          "repo": "storytold/figcraft",
+          "topic": "ai",
+          "event": "new",
+          "stars": {
+            "count": 1230,
+            "observed_at": "2026-10-15T06:51:25-07:00",
+            "approximate": false
+          },
+          "title": "Let agents build interfaces and prototypes in an editable design file",
+          "summary": "A Rust-native interface design tool with artboards, auto layout, components, variables and prototype links; the UI, CLI and MCP share one command set, so agents can edit the design.",
+          "reason": "Created on October 9; 0.6.0 shipped on October 14 at 07:26 Los Angeles time with starter templates and better .fig export. A way to explore \"the agent designs, a person keeps editing\".",
+          "verdict": "try",
+          "effort": "medium",
+          "platforms": [
+            "macOS",
+            "Windows",
+            "Linux"
+          ],
+          "use_case": "Have an agent generate a simple landing page, dashboard or design system, then adjust auto layout, components and colors on the canvas and try early interactive prototypes.",
+          "requirements": "Official 0.6.0 ships a universal macOS DMG plus Windows and Linux installers, with a separate macOS CLI package. Driving it from an agent needs the figcraft-cli MCP configured; building from source needs Rust.",
+          "assessment": "Worth trying on one small design file first. The editor, layout, rendering and MCP source directories, release assets and license were checked; it was not installed or run.",
+          "caution": "Officially alpha. .fig import is best effort and was not checked against real Figma files; collaboration is a preview. No basis to call it a full Figma replacement. Brand assets have separate terms.",
+          "license": {
+            "name": "MIT / Apache-2.0 (code)",
+            "kind": "open-source",
+            "url": "https://github.com/storytold/figcraft/blob/main/LICENSE-MIT"
+          },
+          "tags": [
+            "Interface design",
+            "MCP",
+            "alpha"
+          ],
+          "sources": [
+            {
+              "label": "Official README: features, MCP and alpha status",
+              "url": "https://github.com/storytold/figcraft",
+              "observed_at": "2026-10-15T06:51:25-07:00"
+            },
+            {
+              "label": "Official 0.6.0 release and installers",
+              "url": "https://github.com/storytold/figcraft/releases/tag/v0.6.0",
+              "observed_at": "2026-10-15T06:51:25-07:00"
+            },
+            {
+              "label": "Brand and asset notes",
+              "url": "https://github.com/storytold/figcraft/blob/main/ATTRIBUTION.md",
+              "observed_at": "2026-10-15T06:51:25-07:00"
+            },
+            {
+              "label": "GitHub API: stars at collection, creation and recent activity",
+              "url": "https://api.github.com/repos/storytold/figcraft",
+              "observed_at": "2026-10-15T06:51:25-07:00"
+            }
+          ],
+          "tech_stack": {
+            "items": [
+              {
+                "name": "Rust",
+                "role": "Editor and document engine"
+              },
+              {
+                "name": "egui / eframe",
+                "role": "Native interface"
+              },
+              {
+                "name": "tiny-skia",
+                "role": "2D raster rendering"
+              },
+              {
+                "name": "WebAssembly",
+                "role": "Browser version"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Cargo workspace dependencies",
+                "url": "https://github.com/storytold/figcraft/blob/main/Cargo.toml"
+              }
+            ],
+            "note": "The core is a native Rust editor; the browser version compiles the same code base to WebAssembly.",
+            "verified_at": "2026-10-16T05:51:06-07:00"
+          }
+        },
+        {
+          "name": "Open Claude UI",
+          "repo": "Caho1/open-claude-ui",
+          "topic": "ai",
+          "event": "new",
+          "stars": {
+            "count": 594,
+            "observed_at": "2026-10-15T06:51:25-07:00",
+            "approximate": false
+          },
+          "title": "A Claude-style React interface reference, from chat input to split preview",
+          "summary": "A community library of components and interactions: chat input, message bubbles, MCP action cards, scroll anchoring, motion presets and draggable split panes, with analysis docs written in Chinese.",
+          "reason": "Created on October 14 at 07:05 Los Angeles time, a freshly published front-end project. It breaks the interaction details of AI clients into readable, reusable modules, related to the REA app direction picked earlier.",
+          "verdict": "watch",
+          "effort": "medium",
+          "platforms": [
+            "React / Web",
+            "Electron"
+          ],
+          "use_case": "Reference IME handling, streaming message scroll, spring motion and split-pane interactions when building chat apps, agent consoles or web UIs with artifact previews.",
+          "requirements": "The README targets React 18+, TypeScript 5.5+, Tailwind CSS 3.4+ and Framer Motion 11+; you wire the components, theme and config into your own project. Some desktop modules also need Electron.",
+          "assessment": "Watch the components and engineering notes closely. The src/index.ts entry point and specific modules in code-examples were confirmed; no build was run. Best used as a source reference first.",
+          "caution": "Not an official Anthropic project. \"Production-grade\", \"high fidelity\" and how faithfully algorithms were reproduced are the author's claims, not independently verified. Electron-only modules cannot be used as plain browser components.",
+          "license": {
+            "name": "MIT",
+            "kind": "open-source",
+            "url": "https://github.com/Caho1/open-claude-ui/blob/main/LICENSE"
+          },
+          "tags": [
+            "React",
+            "UI components",
+            "Motion"
+          ],
+          "sources": [
+            {
+              "label": "Official repository and integration notes",
+              "url": "https://github.com/Caho1/open-claude-ui",
+              "observed_at": "2026-10-15T06:51:25-07:00"
+            },
+            {
+              "label": "Actual component and interaction modules",
+              "url": "https://github.com/Caho1/open-claude-ui/tree/main/code-examples",
+              "observed_at": "2026-10-15T06:51:25-07:00"
+            },
+            {
+              "label": "Package config and dependencies",
+              "url": "https://github.com/Caho1/open-claude-ui/blob/main/package.json",
+              "observed_at": "2026-10-15T06:51:25-07:00"
+            },
+            {
+              "label": "GitHub API: stars at collection, creation and recent activity",
+              "url": "https://api.github.com/repos/Caho1/open-claude-ui",
+              "observed_at": "2026-10-15T06:51:25-07:00"
+            }
+          ],
+          "tech_stack": {
+            "items": [
+              {
+                "name": "React / TypeScript",
+                "role": "UI components"
+              },
+              {
+                "name": "Tailwind CSS",
+                "role": "Styling and themes"
+              },
+              {
+                "name": "Framer Motion",
+                "role": "Interaction motion"
+              },
+              {
+                "name": "Electron",
+                "role": "Some desktop modules"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Component dependencies",
+                "url": "https://github.com/Caho1/open-claude-ui/blob/main/package.json"
+              },
+              {
+                "label": "Official components and integration notes",
+                "url": "https://github.com/Caho1/open-claude-ui/blob/main/README.md"
+              }
+            ],
+            "note": "A collection of components and source references; Electron is used only by some desktop modules and is not needed in the browser.",
+            "verified_at": "2026-10-16T05:51:06-07:00"
+          }
+        },
+        {
+          "name": "Scout",
+          "repo": "outcrawlai/scout",
+          "topic": "ai",
+          "event": "new",
+          "stars": {
+            "count": 799,
+            "observed_at": "2026-10-15T06:51:25-07:00",
+            "approximate": false
+          },
+          "title": "Connect natural-language tasks to a real browser in TypeScript",
+          "summary": "Give it a task and the agent reads pages, clicks, types and scrolls, optionally returning structured results by JSON Schema. Works with local Chromium, an existing CDP browser or Outcrawl's hosted browsers.",
+          "reason": "Created on October 13; the package is at 0.1.1. Separate models can be configured for acting, planning, screenshot understanding and extraction, useful for studying how browser agents split work and cost.",
+          "verdict": "observe",
+          "effort": "medium",
+          "platforms": [
+            "Node.js",
+            "Chromium / CDP"
+          ],
+          "use_case": "Orchestrate research, multi-page comparisons and form work in your own app; for developers who want a TypeScript SDK and their own model endpoints.",
+          "requirements": "Node.js 22+ and at least a chat-completions-compatible endpoint for the hands model. Local runs also need Chromium / Playwright; only the hosted browser needs an Outcrawl account and key. Screenshot understanding needs a model that accepts images.",
+          "assessment": "Keep an eye on it; first see whether the SDK and examples fit your workflow. scout.ts, the browser bindings, model config source and package version were checked; no task was run.",
+          "caution": "Very early; task success rates are not independently verified. The open-source SDK and the commercial hosted browser are separate; run replays depend on the cloud. The author's 92.5% figure is page reachability in the cloud browser, not an agent task completion rate.",
+          "license": {
+            "name": "Apache-2.0 (SDK)",
+            "kind": "open-source",
+            "url": "https://github.com/outcrawlai/scout/blob/main/LICENSE"
+          },
+          "tags": [
+            "TypeScript",
+            "Browser agent",
+            "Bring your own model"
+          ],
+          "sources": [
+            {
+              "label": "Official README: local and cloud runs, model roles",
+              "url": "https://github.com/outcrawlai/scout",
+              "observed_at": "2026-10-15T06:51:25-07:00"
+            },
+            {
+              "label": "SDK version, Node requirement and exports",
+              "url": "https://github.com/outcrawlai/scout/blob/main/packages/scout/package.json",
+              "observed_at": "2026-10-15T06:51:25-07:00"
+            },
+            {
+              "label": "Task execution source",
+              "url": "https://github.com/outcrawlai/scout/blob/main/packages/scout/src/scout.ts",
+              "observed_at": "2026-10-15T06:51:25-07:00"
+            },
+            {
+              "label": "GitHub API: stars at collection, creation and recent activity",
+              "url": "https://api.github.com/repos/outcrawlai/scout",
+              "observed_at": "2026-10-15T06:51:25-07:00"
+            }
+          ],
+          "tech_stack": {
+            "items": [
+              {
+                "name": "TypeScript / Node.js",
+                "role": "Agent SDK and execution loop"
+              },
+              {
+                "name": "Chromium / CDP",
+                "role": "Browser control"
+              },
+              {
+                "name": "Playwright",
+                "role": "Local browser launch"
+              },
+              {
+                "name": "Chat Completions",
+                "role": "Model API compatibility protocol"
+              }
+            ],
+            "sources": [
+              {
+                "label": "SDK and Node requirement",
+                "url": "https://github.com/outcrawlai/scout/blob/main/packages/scout/package.json"
+              },
+              {
+                "label": "Browser layer dependencies",
+                "url": "https://github.com/outcrawlai/scout/blob/main/packages/scout-cdp/package.json"
+              },
+              {
+                "label": "SDK entry point",
+                "url": "https://github.com/outcrawlai/scout/blob/main/packages/scout/src/scout.ts"
+              }
+            ],
+            "note": "CDP and Chat Completions are protocols; neither implies depending on OpenAI's hosted service or having to use the cloud browser.",
+            "verified_at": "2026-10-16T05:51:06-07:00"
+          }
+        },
+        {
+          "name": "Taste Skill",
+          "repo": "Leonxlnx/taste-skill",
+          "stars": {
+            "count": 97067,
+            "observed_at": "2026-10-15T08:02:31-07:00",
+            "approximate": false
+          },
+          "topic": "ai",
+          "event": "new",
+          "title": "Let agents choose a visual direction for web pages, then check and fix it in a real browser",
+          "summary": "A collection of web design skills: art direction, real asset search and a multi-round screenshot review loop.",
+          "reason": "The v2.0.0 rewrite shipped on October 13 at 14:05 Los Angeles time, adding scripts, a reference library and browser checks. Recent star growth not verified.",
+          "verdict": "try",
+          "effort": "medium",
+          "platforms": [
+            "macOS",
+            "Windows",
+            "Linux"
+          ],
+          "tags": [
+            "Agent Skills",
+            "Web design",
+            "Browser checks"
+          ],
+          "use_case": "Product sites, landing pages and portfolios; for admin interfaces pick one of the repository's other UI skills.",
+          "requirements": "Node 22+ and Chrome, Edge or Chromium; finding images needs network access. The author estimates 30-45 minutes and hundreds of thousands of tokens for the full flow.",
+          "assessment": "Worth a side-by-side test on a small page, focusing on whether its visual rules suit your project.",
+          "caution": "The full skill was not installed or run end to end. Its taste constraints are strong; the author's small-sample model reviews do not prove consistently higher scores than working without the skill. Images keep their own licenses and attribution requirements.",
+          "license": {
+            "name": "MIT",
+            "kind": "open-source",
+            "url": "https://github.com/Leonxlnx/taste-skill/blob/main/LICENSE"
+          },
+          "sources": [
+            {
+              "label": "Official repository and requirements",
+              "url": "https://github.com/Leonxlnx/taste-skill",
+              "observed_at": "2026-10-15T08:02:31-07:00"
+            },
+            {
+              "label": "v2.0.0 release",
+              "url": "https://github.com/Leonxlnx/taste-skill/releases/tag/v2.0.0",
+              "observed_at": "2026-10-15T08:02:31-07:00"
+            },
+            {
+              "label": "Changes and testing limits",
+              "url": "https://github.com/Leonxlnx/taste-skill/blob/main/CHANGELOG.md",
+              "observed_at": "2026-10-15T08:02:31-07:00"
+            }
+          ],
+          "demo": {
+            "status": "ready",
+            "path": "/demos/taste-skill/",
+            "title": "Break \"template look\" into checkable details, then scan real code",
+            "summary": "Remove the gradient, shadows, purple and vague copy from a small card one by one; then run the same scanner on any code, including this page's earlier and current styles.",
+            "evidence": "Card example: 3 FAIL / 3 WARN at first, 0 / 0 after every fix. Editor presets tested: a typical AI landing page hits 15 times; an excerpt of this page's earlier style gives 9 FAIL / 5 WARN, the current style 0 / 0. Clicking a finding selects its line, and typed edits rescan live. No horizontal overflow at 1360px or 390px; no console errors.",
+            "limitations": "Only Taste Skill's static source lint is verified. The rules are the author's preferences, not a visual quality score; zero hits does not mean a page looks good. AI design, the real browser inspector and the full flow are not verified. Pinned commit f624f37a8c650b9cc550253104925efe4c8de246; only file and process interfaces are adapted.",
+            "tested_at": "2026-10-16T19:43:00-07:00",
+            "tech_stack": {
+              "items": [
+                {
+                  "name": "JavaScript",
+                  "role": "Real upstream lint rules and live editor"
+                },
+                {
+                  "name": "HTML / CSS",
+                  "role": "Static preview and toggles"
+                },
+                {
+                  "name": "Python / Node.js",
+                  "role": "Adapter build and comparison with the original CLI"
+                }
+              ],
+              "sources": [
+                {
+                  "label": "Pinned upstream lint",
+                  "url": "https://github.com/Leonxlnx/taste-skill/blob/f624f37a8c650b9cc550253104925efe4c8de246/skills/taste-skill/scripts/lint.mjs"
+                }
+              ],
+              "note": "Checked against the local scanner.js, app.js, presets.js, build.py and verify.mjs. The rules run in the browser; no CDP inspector or model is used. The style excerpts in the editor presets are taken verbatim from this page's history.",
+              "verified_at": "2026-10-16T19:43:00-07:00"
+            }
+          },
+          "tech_stack": {
+            "items": [
+              {
+                "name": "Agent Skills / Markdown",
+                "role": "Design process and rule instructions"
+              },
+              {
+                "name": "JavaScript / Node.js",
+                "role": "Sampling, assets and lint scripts"
+              },
+              {
+                "name": "Chrome DevTools Protocol",
+                "role": "Real browser checks"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Official skill and run instructions",
+                "url": "https://github.com/Leonxlnx/taste-skill/blob/main/README.md"
+              },
+              {
+                "label": "Browser check implementation",
+                "url": "https://github.com/Leonxlnx/taste-skill/blob/main/skills/taste-skill/scripts/lib/cdp.mjs"
+              }
+            ],
+            "note": "The skill is not tied to React or any other front-end framework; the Node scripts and CDP are the checking toolchain, and a coding agent still runs the design process.",
+            "verified_at": "2026-10-16T05:51:06-07:00"
+          }
+        },
+        {
+          "name": "XERJ",
+          "repo": "xerj-org/xerj",
+          "stars": {
+            "count": 4962,
+            "observed_at": "2026-10-15T08:02:31-07:00",
+            "approximate": false
+          },
+          "topic": "ai",
+          "event": "new",
+          "title": "Index local code and docs so agents can search them",
+          "summary": "A Rust local search engine that indexes code, docs, logs and PDFs automatically, with MCP and Elasticsearch-compatible APIs.",
+          "reason": "On GitHub's daily trending list at collection, showing 725 stars gained today; current release 1.0.0-rc.95.",
+          "verdict": "watch",
+          "effort": "medium",
+          "platforms": [
+            "macOS",
+            "Windows",
+            "Linux"
+          ],
+          "tags": [
+            "Code search",
+            "MCP",
+            "Rust"
+          ],
+          "use_case": "Unfamiliar large code bases, internal documentation Q&A, and searching how similar open-source projects implement things.",
+          "requirements": "Runs a local indexing service; binaries for macOS, Windows and Linux. The default lexical embeddings work offline; optional neural embeddings download a model.",
+          "assessment": "Watch how useful code search is in practice; check recall on a non-critical code base first.",
+          "caution": "Not installed or tested yet, and still a release candidate. The advertised 40× token saving is not a general result; the author's concrete experiment in the README is 8 tasks with 16 runs each, with output tokens about 1/2.7 of a grep approach.",
+          "license": {
+            "name": "Apache-2.0",
+            "kind": "open-source",
+            "url": "https://github.com/xerj-org/xerj/blob/main/LICENSE"
+          },
+          "sources": [
+            {
+              "label": "Official repository and run instructions",
+              "url": "https://github.com/xerj-org/xerj",
+              "observed_at": "2026-10-15T08:02:31-07:00"
+            },
+            {
+              "label": "GitHub daily trending",
+              "url": "https://github.com/trending?since=daily",
+              "observed_at": "2026-10-15T08:02:31-07:00"
+            },
+            {
+              "label": "Release",
+              "url": "https://github.com/xerj-org/xerj/releases/tag/v1.0.0-rc.95",
+              "observed_at": "2026-10-15T08:02:31-07:00"
+            }
+          ],
+          "heat": {
+            "label": "+725 Stars",
+            "window": "GitHub Trending 'today' window, not an exact 24 hours",
+            "observed_at": "2026-10-15T08:02:31-07:00",
+            "total_only": false
+          },
+          "tech_stack": {
+            "items": [
+              {
+                "name": "Rust",
+                "role": "Indexing and search engine"
+              },
+              {
+                "name": "Tokio",
+                "role": "Async runtime"
+              },
+              {
+                "name": "Axum",
+                "role": "HTTP / search API"
+              },
+              {
+                "name": "tree-sitter",
+                "role": "Code syntax and symbol parsing"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Engine workspace dependencies",
+                "url": "https://github.com/xerj-org/xerj/blob/main/engine/Cargo.toml"
+              },
+              {
+                "label": "Index and API docs",
+                "url": "https://github.com/xerj-org/xerj/blob/main/README.md"
+              }
+            ],
+            "note": "Elasticsearch refers to a compatible API; the project does not depend on an Elasticsearch service.",
+            "verified_at": "2026-10-16T05:51:06-07:00"
+          }
+        },
+        {
+          "name": "Open Intelligent UI",
+          "repo": "CopilotKit/OpenIntelligentUI",
+          "stars": {
+            "count": 3207,
+            "observed_at": "2026-10-15T13:02:13-07:00",
+            "approximate": false
+          },
+          "topic": "ai",
+          "event": "new",
+          "title": "Turn chat answers into charts, maps, calculators and interactive pages",
+          "summary": "A chat interface template driven by CopilotKit and AG-UI, combining a Next.js front end, a Python agent and generative UI rendered in iframes.",
+          "reason": "Announced by the CopilotKit team on October 9; close to UI and web development. Recent star growth not verified.",
+          "verdict": "try",
+          "effort": "medium",
+          "platforms": [
+            "macOS",
+            "Windows",
+            "Linux"
+          ],
+          "tags": [
+            "Generative UI",
+            "Next.js",
+            "AG-UI"
+          ],
+          "use_case": "Add interactive answers to an AI product, or study how front end, agent back end and isolated rendering fit together.",
+          "requirements": "Node 22+, pnpm 9+, Python 3.12+ and uv; the default setup needs two API keys, OpenAI and TypeSafe/Jev, billed to your own provider accounts.",
+          "assessment": "Worth trying the example and reading the implementation before deciding whether to integrate it into your product.",
+          "caution": "Not installed or tested yet. The demo video includes pre-rendered scenes and real output varies; for now it is best as an implementation reference.",
+          "license": {
+            "name": "MIT",
+            "kind": "open-source",
+            "url": "https://github.com/CopilotKit/OpenIntelligentUI/blob/main/LICENSE"
+          },
+          "sources": [
+            {
+              "label": "Official code and run instructions",
+              "url": "https://github.com/CopilotKit/OpenIntelligentUI",
+              "observed_at": "2026-10-15T13:02:13-07:00"
+            },
+            {
+              "label": "Official announcement, October 9",
+              "url": "https://www.copilotkit.ai/blog/introducing-open-intelligent-ui",
+              "observed_at": "2026-10-15T13:02:13-07:00"
+            }
+          ],
+          "tech_stack": {
+            "items": [
+              {
+                "name": "Next.js / React",
+                "role": "Web interface"
+              },
+              {
+                "name": "CopilotKit / AG-UI",
+                "role": "Agent-to-UI communication"
+              },
+              {
+                "name": "Python / FastAPI",
+                "role": "Agent service"
+              },
+              {
+                "name": "LangGraph / Deep Agents",
+                "role": "Agent execution"
+              },
+              {
+                "name": "Websandbox",
+                "role": "Isolated rendering of generated UI"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Front-end dependencies",
+                "url": "https://github.com/CopilotKit/OpenIntelligentUI/blob/main/apps/app/package.json"
+              },
+              {
+                "label": "Back-end dependencies",
+                "url": "https://github.com/CopilotKit/OpenIntelligentUI/blob/main/apps/agent/pyproject.toml"
+              }
+            ],
+            "note": "These are the technologies the project is built with; OpenAI and Jev are the default model service settings and still need their keys.",
+            "verified_at": "2026-10-16T05:51:06-07:00"
+          }
+        },
+        {
+          "name": "RDST",
+          "repo": "readysettech/rdst",
+          "stars": {
+            "count": 17,
+            "observed_at": "2026-10-15T13:02:27-07:00",
+            "approximate": false
+          },
+          "topic": "ai",
+          "event": "new",
+          "title": "Monitor slow PostgreSQL and MySQL queries and get tuning suggestions",
+          "summary": "A local database diagnostics tool and agent that reads execution plans to suggest indexes, configuration and SQL rewrites, with an MCP interface.",
+          "reason": "Shown on Show HN on October 15; at collection (13:01) the post was about an hour old with 5 points. An early find with little attention so far.",
+          "verdict": "observe",
+          "effort": "medium",
+          "platforms": [
+            "macOS",
+            "Windows",
+            "Linux"
+          ],
+          "tags": [
+            "Database diagnostics",
+            "PostgreSQL",
+            "MySQL",
+            "MCP"
+          ],
+          "use_case": "Track down database performance problems after a web project goes live.",
+          "requirements": "Installers for macOS, Windows and Linux; needs a read-only database connection and query statistics. Automatic AI monitoring needs a Readyset login. Building from source needs Node 22+, pnpm 11, Python 3.10+ and uv.",
+          "assessment": "A concrete use case; keep an eye on real tuning results and user feedback.",
+          "caution": "Not installed or tested yet. AI analysis sends SQL, execution plans and table schemas; monitoring records stay on your machine. Do not treat its suggestions as verified performance gains.",
+          "license": {
+            "name": "Apache-2.0",
+            "kind": "open-source",
+            "url": "https://github.com/readysettech/rdst/blob/main/LICENSE"
+          },
+          "sources": [
+            {
+              "label": "Official code and docs",
+              "url": "https://github.com/readysettech/rdst",
+              "observed_at": "2026-10-15T13:02:27-07:00"
+            },
+            {
+              "label": "Show HN launch discussion",
+              "url": "https://news.ycombinator.com/item?id=50107729",
+              "observed_at": "2026-10-15T13:02:27-07:00"
+            },
+            {
+              "label": "Data handling notes",
+              "url": "https://readyset.io/docs/readyset-ai/rdst/desktop/privacy",
+              "observed_at": "2026-10-15T13:02:27-07:00"
+            }
+          ],
+          "heat": {
+            "label": "5 points on Show HN",
+            "window": "Collected October 15 at 13:01, about an hour after posting",
+            "observed_at": "2026-10-15T13:01:57-07:00",
+            "total_only": false
+          },
+          "tech_stack": {
+            "items": [
+              {
+                "name": "Python / FastAPI",
+                "role": "Diagnostics CLI and local API"
+              },
+              {
+                "name": "React / TypeScript",
+                "role": "Web interface"
+              },
+              {
+                "name": "Vite / Tailwind CSS",
+                "role": "Front-end build and styling"
+              },
+              {
+                "name": "Electron",
+                "role": "Desktop shell"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Python service dependencies",
+                "url": "https://github.com/readysettech/rdst/blob/main/cli/pyproject.toml"
+              },
+              {
+                "label": "Front-end dependencies",
+                "url": "https://github.com/readysettech/rdst/blob/main/web/package.json"
+              },
+              {
+                "label": "Desktop dependencies",
+                "url": "https://github.com/readysettech/rdst/blob/main/desktop/package.json"
+              }
+            ],
+            "note": "PostgreSQL / MySQL are the databases being diagnosed, not part of the project's interface or service framework.",
+            "verified_at": "2026-10-16T05:51:06-07:00"
+          }
+        },
+        {
+          "name": "Endo",
+          "repo": "longsurf-ai/endo",
+          "topic": "ai",
+          "event": "new",
+          "stars": {
+            "count": 16,
+            "observed_at": "2026-10-15T19:59:31-07:00",
+            "approximate": false
+          },
+          "tags": [
+            "Multi-model collaboration",
+            "TypeScript workflows",
+            "Desktop app"
+          ],
+          "title": "Switch coding agents in one chat and orchestrate them with TypeScript",
+          "summary": "An Electron desktop app and local service that connect the Codex, Claude Code and Antigravity CLIs, with sessions, branching discussions, workflows and scheduled runs.",
+          "reason": "New on Show HN on October 15; v0.1.1 shipped on October 14 at 21:51 Los Angeles time with a signed Mac build and background updates. Little attention so far: an early find.",
+          "verdict": "observe",
+          "effort": "medium",
+          "platforms": [
+            "macOS (Apple Silicon)"
+          ],
+          "use_case": "If you already use several coding agents and want to keep context in one interface, or try repeatable multi-model drafting, review and debate workflows.",
+          "requirements": "The ready-made installer targets Apple Silicon Macs; sign in to at least one supported model provider. Development needs Node 24, Bun 1.4.2 and Just. The dev build installs pinned versions of the related CLIs on first launch; usage is still bound by each provider's account limits.",
+          "assessment": "Keep an eye on it. Bringing existing CLIs into one interface and orchestrating workflows is interesting, but it is 0.1.x; validate context hand-off, permissions and stability on small tasks first.",
+          "caution": "Only code, docs, license and releases were checked; not installed or tested. Full cross-provider history hand-off and workflow results are the author's claims, and the docs warn of breaking changes ahead. Running models in parallel uses each provider's quota.",
+          "license": {
+            "name": "MIT",
+            "kind": "open-source",
+            "url": "https://github.com/longsurf-ai/endo/blob/main/LICENSE"
+          },
+          "heat": {
+            "label": "4 points on Show HN",
+            "window": "Collected October 15 at 19:59, about 5 hours after posting; little attention, not a verified trend",
+            "observed_at": "2026-10-15T19:59:31-07:00",
+            "total_only": false
+          },
+          "sources": [
+            {
+              "label": "Official repository and feature overview",
+              "url": "https://github.com/longsurf-ai/endo",
+              "observed_at": "2026-10-15T19:59:31-07:00"
+            },
+            {
+              "label": "v0.1.1 release",
+              "url": "https://github.com/longsurf-ai/endo/releases/tag/v0.1.1"
+            },
+            {
+              "label": "Requirements and CLI install behavior",
+              "url": "https://github.com/longsurf-ai/endo/blob/main/docs/development.md"
+            },
+            {
+              "label": "Author's Show HN post",
+              "url": "https://news.ycombinator.com/item?id=50110614"
+            }
+          ],
+          "tech_stack": {
+            "items": [
+              {
+                "name": "TypeScript / Node.js",
+                "role": "Local service and workflows"
+              },
+              {
+                "name": "React / Vite",
+                "role": "Chat and workbench"
+              },
+              {
+                "name": "Electron",
+                "role": "Desktop shell"
+              },
+              {
+                "name": "Effect",
+                "role": "Service and task organization"
+              },
+              {
+                "name": "SQLite / Drizzle",
+                "role": "Local data"
+              },
+              {
+                "name": "AG-UI / tRPC",
+                "role": "Streaming and typed API"
+              }
+            ],
+            "sources": [
+              {
+                "label": "Front-end dependencies",
+                "url": "https://github.com/longsurf-ai/endo/blob/main/app/package.json"
+              },
+              {
+                "label": "Local service dependencies",
+                "url": "https://github.com/longsurf-ai/endo/blob/main/server/package.json"
+              },
+              {
+                "label": "Desktop dependencies",
+                "url": "https://github.com/longsurf-ai/endo/blob/main/platform/desktop/package.json"
+              }
+            ],
+            "note": "The underlying coding agents connect through each provider's CLI; this is Endo's own core implementation.",
+            "verified_at": "2026-10-16T05:51:06-07:00"
+          }
+        }
+      ]
+    }
+  ]
+}

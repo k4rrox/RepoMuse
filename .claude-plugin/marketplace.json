@@ -1,0 +1,11 @@
+{
+  "name": "repomuse",
+  "owner": { "name": "k4rrox" },
+  "plugins": [
+    {
+      "name": "repomuse",
+      "source": "./",
+      "description": "A personalized feed of GitHub projects, each shown with a demo your agent built so you can try it."
+    }
+  ]
+}

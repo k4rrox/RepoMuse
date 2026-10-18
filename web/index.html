@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Personalized GitHub picks from your agent, with demos it built and verified itself.">
+  <title>RepoMuse</title>
+  <link rel="icon" href="/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/app.css">
+  <script type="module" src="/js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#feed" data-text="skip.picks">Skip to picks</a>
+  <header class="masthead">
+    <a class="wordmark" href="/" aria-label="RepoMuse">
+      <img src="/mark.svg" width="28" height="28" alt="">
+      <span id="site-title">RepoMuse</span>
+    </a>
+    <nav aria-label="Main">
+      <a id="nav-daily" href="/" aria-current="page" data-text="nav.picks">Picks</a>
+      <a id="nav-demos" href="/?view=demos"><span data-text="nav.demos">Demos</span><span id="nav-demo-count" class="nav-count"></span></a>
+    </nav>
+    <span class="local-note" data-text="local">Runs on this machine only</span>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar" aria-label="Filters">
+      <div id="date-panel" class="date-panel">
+        <label class="side-label" for="edition" data-text="side.edition">Edition</label>
+        <div class="date-control">
+          <button id="previous-day" type="button" data-text-aria="previous" aria-label="Previous edition">‹</button>
+          <select id="edition"><option>…</option></select>
+          <button id="next-day" type="button" data-text-aria="next" aria-label="Next edition">›</button>
+        </div>
+      </div>
+      <p class="side-label" data-text="side.topic">Topic</p>
+      <div id="topics" class="filters"></div>
+      <p class="side-label" data-text="side.verdict">Verdict</p>
+      <div id="verdicts" class="filters"></div>
+      <p class="side-label" data-text="side.feedback">My feedback</p>
+      <div id="feedbacks" class="filters"></div>
+      <p id="side-note" class="side-note"></p>
+    </aside>
+
+    <section id="feed" class="feed" aria-labelledby="page-title" tabindex="-1">
+      <div class="feed-heading">
+        <h1 id="page-title"><span id="page-heading" data-text="heading.picks">Picks</span></h1>
+        <button id="refresh" class="quiet-button" type="button" data-text="refresh">Refresh</button>
+      </div>
+      <p id="intro" class="intro" data-text="intro.default"></p>
+      <p id="edition-label" class="edition-label"></p>
+      <div id="demo-banner" class="demo-banner" hidden>
+        <strong data-text="banner.title">Sample picks</strong>
+        <span data-text="banner.text"></span>
+      </div>
+      <div class="feed-tools">
+        <label class="search-field"><span class="visually-hidden" data-text="search.label">Search</span><input id="search" type="search" autocomplete="off"></label>
+        <label class="sort-field"><span data-text="sort.label">Sort</span><select id="sort"><option value="editorial" data-text="sort.editorial"></option><option value="easy" data-text="sort.easy"></option><option value="name" data-text="sort.name"></option></select></label>
+        <button id="reset-filters" class="text-button" type="button" data-text="reset" hidden>Clear filters</button>
+      </div>
+      <div class="feed-meta"><span id="feed-meta" data-text="meta.loading">Loading picks…</span><span id="shown-count"></span><span id="result-count" class="visually-hidden">0</span></div>
+      <p id="status" class="status" role="status" aria-live="polite" hidden></p>
+      <div id="results" class="project-list" aria-busy="true"></div>
+      <div id="empty" class="empty-state" hidden>
+        <h2 id="empty-title"></h2>
+        <p id="empty-message"></p>
+        <button id="empty-reset" class="quiet-button" type="button" data-text="reset">Clear filters</button>
+      </div>
+      <footer class="feed-footer">
+        <p data-text="footer"></p>
+      </footer>
+    </section>
+  </main>
+  <noscript><p class="noscript">Turn on JavaScript to load the picks and use the filters.</p></noscript>
+</body>
+</html>

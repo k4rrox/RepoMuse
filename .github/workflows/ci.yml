@@ -1,0 +1,45 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python: ["3.9", "3.11", "3.13"]
+        include:
+          - os: macos-latest
+            python: "3.13"
+          - os: windows-latest
+            python: "3.13"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Unit tests
+        run: python -B -m unittest discover -s tests -v
+      - name: Front-end syntax
+        run: |
+          for f in web/js/*.js; do node --check "$f"; done
+      - name: Bundled sample validates
+        run: python -B -m repomuse check
+      - name: Style lint (taste-skill rules)
+        run: node demos/taste-skill/source/upstream/lint.mjs web
+      - name: Repository stays small
+        if: runner.os == 'Linux'
+        run: |
+          size=$(git ls-files -z | xargs -0 du -ck | tail -1 | cut -f1)
+          echo "tracked files: ${size} KB"
+          test "$size" -lt 5120

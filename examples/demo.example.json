@@ -1,0 +1,15 @@
+{
+  "status": "ready",
+  "path": "/demos/project-slug/",
+  "title": "One small experiment with one core capability",
+  "summary": "What you can do once it opens.",
+  "tested_at": "2026-10-17T10:30:00+08:00",
+  "evidence": "Which controls were actually used, and what was observed.",
+  "limitations": "What was not verified, and whether any data or API is simulated.",
+  "tech_stack": {
+    "items": [{ "name": "Vanilla JS", "role": "Demo interactions" }],
+    "sources": [{ "label": "Pinned upstream commit", "url": "https://github.com/owner/repository/tree/0123456789abcdef" }],
+    "verified_at": "2026-10-17T10:30:00+08:00",
+    "note": "Only what this demo actually runs, not the whole upstream stack."
+  }
+}

@@ -1,0 +1,10 @@
+/* Shared RepoMuse chrome for every demo page. Scoped by class so demo styles stay untouched. */
+.radar-bar{all:initial;box-sizing:border-box;display:flex;align-items:center;gap:18px;width:100%;min-height:42px;padding:8px max(16px,calc((100% - 1180px)/2));background:#17181b;color:#d9d9d4;font:500 13px/1.4 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;position:relative;z-index:50}
+.radar-bar *{box-sizing:border-box}
+.radar-bar a{all:unset;cursor:pointer;color:#f4f4f1;white-space:nowrap}
+.radar-bar a:hover{text-decoration:underline;text-underline-offset:3px}
+.radar-bar a:focus-visible{outline:2px solid #7fd1a5;outline-offset:3px}
+.radar-bar .radar-bar-name{color:#9b9c97;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.radar-bar .radar-bar-repo{margin-left:auto}
+@media(max-width:520px){.radar-bar{gap:12px;font-size:12px}.radar-bar .radar-bar-name{display:none}}
+@media print{.radar-bar{display:none}}

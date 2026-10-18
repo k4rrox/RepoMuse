@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Taste Skill · Break the template look into checkable details</title><link rel="stylesheet" href="../radar-kit/bar.css"><link rel="stylesheet" href="style.css"></head>
+<body>
+<nav class="radar-bar" aria-label="RepoMuse"><a href="/?view=demos">← All demos</a><span class="radar-bar-name">Taste Skill · front-end taste rules</span><a class="radar-bar-repo" href="https://github.com/Leonxlnx/taste-skill">View on GitHub</a></nav>
+<main>
+  <header><h1>Break the “template look” into checkable details.</h1><p class="intro">Taste Skill is a set of front-end taste rules for agents, with a source scanner: gradients, resting shadows, purple, vague copy, each pinned to an exact line. Remove them one by one on this small card, then scan real code with it.</p></header>
+  <div class="toolbar" role="group" aria-label="Sample styles"><button id="reset" class="active">Original sample</button><button id="fix">Apply the rules</button><span id="state" aria-live="polite">Original sample</span></div>
+  <div class="experiment">
+    <section class="preview-panel" aria-labelledby="preview-title"><h2 id="preview-title">Same content, different styles</h2><div class="preview" id="preview"><p class="example-label">Sample content · AI notes tool</p><div class="mock-card"><h3 id="sample-title">Unleash the future of notes.</h3><p id="sample-copy">Effortlessly transform ideas into a seamless workflow.</p><button id="sample-action" type="button" tabindex="-1">Get started</button></div><p class="preview-note">Static style sample; the button does nothing.</p></div><fieldset><legend>Adjust one at a time</legend><label><input type="checkbox" id="gradient"> Remove the gradient</label><label><input type="checkbox" id="shadow"> Remove the resting shadow</label><label><input type="checkbox" id="purple"> Replace the purple</label><label><input type="checkbox" id="copy"> Use concrete copy</label></fieldset></section>
+    <section class="report-panel" aria-labelledby="report-title"><div class="report-heading"><h2 id="report-title">Upstream scan results</h2><p id="count" aria-live="polite"></p></div><p class="scope">These are the Taste Skill author's taste rules, not a universal design standard and not a visual quality score.</p><div id="findings" aria-live="polite"></div><details><summary>Show the exact source being scanned</summary><pre id="source"></pre></details></section>
+  </div>
+
+  <section class="editor-section" aria-labelledby="editor-title">
+    <div class="editor-head"><h2 id="editor-title">Scan real code</h2><p>The same scanner on any HTML / CSS / JS. Edit the code below and results update live; click a finding to select its line.</p></div>
+    <div class="preset-row" role="group" aria-label="Sample code"><button type="button" data-preset="landing" class="active">Typical AI landing page</button><button type="button" data-preset="before">This page · before redesign</button><button type="button" data-preset="after">This page · after redesign</button></div>
+    <div class="editor">
+      <label class="visually-hidden" for="code-input">Code to check</label>
+      <textarea id="code-input" spellcheck="false" autocomplete="off"></textarea>
+      <div class="editor-report"><p id="editor-count" class="editor-count" aria-live="polite"></p><ol id="editor-findings"></ol></div>
+    </div>
+    <p class="editor-note" id="editor-note"></p>
+  </section>
+  <footer><strong>What this verifies</strong><p>Runs Taste Skill's real <code>lint.mjs</code> rules and scan loop live; only Node file reading is swapped for in-memory input. Fully offline, no model calls. It verifies static source checks, not AI design, the real browser inspector or the full design process; passing the scan does not make a page look better.</p><p class="provenance">MIT · Leonxlnx/taste-skill · commit f624f37a8c65 · no external fonts, images or network requests</p></footer>
+</main><script type="module" src="app.js"></script>
+</body></html>

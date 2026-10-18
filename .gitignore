@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Your own repomuse: settings, profile, picks, feedback and scratch files stay out of git
+/repomuse.json
+/profile.md
+/strings.json
+/data/
+/work/
+
+# Demos are built locally by your agent; only the shared bar and the bundled example are tracked
+/demos/*
+!/demos/radar-kit/
+!/demos/taste-skill/
+node_modules/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+
+# Local agent tooling
+/.claude/
