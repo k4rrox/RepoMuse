@@ -10,6 +10,9 @@ permissions:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash  # the same script syntax on Linux, macOS and Windows (Git Bash)
     strategy:
       fail-fast: false
       matrix:
