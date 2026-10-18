@@ -14,7 +14,9 @@ First public version, grown out of the author's private "Open Source Radar".
 - `migrate` upgrades Open Source Radar v1 data.
 - `mode`: `ui` (local page) or `no-ui` (picks in the chat). New `digest`, `vote` and `demo` commands; demos run
   on their own port (page port + 1), and on their own the demo server shows a plain list of demos.
-
 - READMEs in English, Simplified Chinese and Japanese; screenshots in `docs/images/`.
 - Publishing rejects unknown fields (with a "did you mean" hint); `check` validates `strings.json` keys and
   `{placeholders}` against the English interface.
+- The chat digest converts times without a zone database where it can (UTC) and otherwise keeps the
+  recorded offset; `pip install tzdata` enables full conversion on Windows.
+- CI on Linux (Python 3.9, 3.11, 3.13), macOS and Windows.
