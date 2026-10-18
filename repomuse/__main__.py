@@ -31,7 +31,7 @@ def cmd_init(args, paths):
         created.append(target.name)
         print(f"created   {target.name}")
     paths.data.mkdir(exist_ok=True)
-    (paths.root / "work").mkdir(exist_ok=True)
+    paths.work.mkdir(exist_ok=True)
     load_config(paths)
     if created:
         print("Next: edit them (or let your agent run the repomuse-setup skill), then publish a first edition.")
@@ -170,7 +170,29 @@ def cmd_demo(args, paths):
 
 def cmd_cover(args, paths):
     from .cover import capture
-    print(f"Wrote {capture(args.slug, demo_port_for(load_config(paths), args.port), paths.demos, args.offset)}")
+    from .ports import running
+    if args.port:
+        demo_port = demo_port_for(load_config(paths), args.port)
+    else:
+        current = running(paths)
+        if not current:
+            raise ValueError("RepoMuse is not running here; start ./run.sh (or repomuse demo) first")
+        demo_port = current["demo_port"]
+    print(f"Wrote {capture(args.slug, demo_port, paths.demos, args.offset)}")
+
+
+def cmd_status(args, paths):
+    from .ports import running
+    current = running(paths)
+    if args.json:
+        shown = {key: value for key, value in (current or {}).items() if key != "instance"}
+        print(json.dumps(dict(running=bool(current), **shown), indent=2))
+    elif current and current["url"]:
+        print(f"Running · {current['url']}  (demos on port {current['demo_port']})")
+    elif current:
+        print(f"Demos only · {current['demo_url']}")
+    else:
+        print("Not running. Start it with ./run.sh")
 
 
 def main(argv=None):
@@ -179,7 +201,9 @@ def main(argv=None):
     commands = parser.add_subparsers(dest="command", required=True)
 
     serve = commands.add_parser("serve", help="start the local page (127.0.0.1 only)")
-    serve.add_argument("--port", type=int)
+    serve.add_argument("--port", type=int, help="use exactly this port (default: repomuse.json, else a free one)")
+    st = commands.add_parser("status", help="show where the local page and demos are running")
+    st.add_argument("--json", action="store_true")
     init = commands.add_parser("init", help="create repomuse.json and profile.md from the examples")
     init.add_argument("--force", action="store_true", help="overwrite existing files")
     commands.add_parser("check", help="validate settings, editions and feedback")
@@ -215,7 +239,7 @@ def main(argv=None):
     cov = commands.add_parser("cover", help="screenshot demos/<slug>/ into its cover image (./run.sh must be running)")
     cov.add_argument("slug")
     cov.add_argument("--offset", type=int, default=0, help="CSS pixels to skip from the top")
-    cov.add_argument("--port", type=int, help="the page port ./run.sh uses; demos are read from the port after it")
+    cov.add_argument("--port", type=int, help="the page port, if not the running one; demos are read from the port after it")
 
     args = parser.parse_args(argv)
     paths = Paths()

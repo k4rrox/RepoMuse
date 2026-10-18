@@ -41,7 +41,7 @@ git clone https://github.com/k4rrox/RepoMuse && cd RepoMuse
 ./run.sh
 ```
 
-http://127.0.0.1:53265/ を開くと、ラベル付きの**サンプルのピック**とサンプルのデモが 1 つ表示されます（デモはポート 53266 で動きます）。
+表示されたアドレスを開くと、ラベル付きの**サンプルのピック**とサンプルのデモが 1 つ表示されます。
 Python 3.9 以上が必要です（macOS とほとんどの Linux には標準で入っています）。Windows では `python -m repomuse serve` を実行してください。
 チャットのダイジェストでも時刻をタイムゾーンに変換したい場合は、任意で `pip install tzdata` を実行してください（ページ側は常に変換できます）。
 
@@ -129,7 +129,7 @@ profile.md + フィードバック ──▶ エージェントが repomuse-run 
 | ファイル | 書き込む人 | 内容 |
 | --- | --- | --- |
 | `profile.md` | あなたとエージェント | 見たいもの、見たくないもの、エージェントが気づいた好み |
-| `repomuse.json` | セットアップ | タイトル、モード（`ui` / `no-ui`）、言語、タイムゾーン、周期、1 回あたりの件数、トピック、ポート、デモの設定 |
+| `repomuse.json` | セットアップ | タイトル、モード（`ui` / `no-ui`）、言語、タイムゾーン、周期、1 回あたりの件数、トピック、ポート（任意）、デモの設定 |
 | `data/editions.json` | `publish` | すべての回 |
 | `data/feedback.json` | ページまたは `vote` | あなたの「役に立った / 興味なし」 |
 | `demos/<slug>/` | エージェント | 作成したデモ |
@@ -139,6 +139,7 @@ profile.md + フィードバック ──▶ エージェントが repomuse-run 
 
 ```bash
 python3 -m repomuse serve [--port N]                  # ./run.sh と同じ
+python3 -m repomuse status [--json]                   # ページとデモが動いている場所
 python3 -m repomuse init                              # repomuse.json と profile.md を作成
 python3 -m repomuse check                             # 設定・データ・翻訳を検証
 python3 -m repomuse publish FILE [--check] [--replace]
@@ -157,7 +158,7 @@ python3 -m repomuse migrate OLD.json                  # Open Source Radar から
 ## セキュリティモデル
 
 - サーバーは `127.0.0.1` にだけバインドし、ローカルの `Host` ヘッダーのみを受け付け、厳格なコンテンツセキュリティポリシーを使います。
-- デモは独立したオリジン（ページのポート + 1）で、`sandbox allow-scripts allow-same-origin` と `connect-src 'none'` のもとで動きます。
+- デモは独立したオリジン（専用のポート）で、`sandbox allow-scripts allow-same-origin` と `connect-src 'none'` のもとで動きます。
   ページのデータを読むことも API を呼ぶこともできず、ネットワークにも出られず、フォーム送信やポップアップもできません。
   配信するのはプレビュー用の資源だけで、`source/`、`src/`、`node_modules/`、README、設定ファイルは決して配信しません。
   （不透明なオリジンのサンドボックスではなく独立オリジンを使うのは、一部の組み込みブラウザーが不透明オリジンのページのサブリソースを

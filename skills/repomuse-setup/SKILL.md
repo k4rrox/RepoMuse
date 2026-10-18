@@ -68,11 +68,12 @@ Ask, with a suggested default for each, so the user can answer "defaults are fin
 In `no-ui` mode skip this section: nothing needs to keep running. Picks arrive in the chat, and a demo
 is opened on demand with `python3 -m repomuse demo <slug>`.
 
-Start `./run.sh` in the background (port from `repomuse.json`, default 53265) and give the user
-`http://127.0.0.1:<port>/`. Demos are served on the next port (`<port + 1>`, or `demo_port` in `repomuse.json`),
-so both must be free. If the port is taken, change `port` in `repomuse.json` rather than passing a port to
-`run.sh`, so `cover` and later runs find the same server. If a RepoMuse server for this checkout is already
-listening there, reuse it: it reads the files on every request. Until the first edition is published the page shows clearly labelled sample picks.
+Start `./run.sh` in the background and give the user the address it prints. Do not assume a port: the
+default pair moves to the next free one when it is busy. `python3 -m repomuse status --json` (or
+`work/server.json`) has the page and demo addresses actually in use, and `cover` reads them from there. If
+RepoMuse is already running for this checkout, `./run.sh` says so and exits; reuse that server, it reads the
+files on every request. Set `port` (and optionally `demo_port`) in `repomuse.json` only if the user wants a
+fixed address; a port set there is used exactly, or the server stops and says it is busy. Until the first edition is published the page shows clearly labelled sample picks.
 
 ## 6. First run and schedule
 

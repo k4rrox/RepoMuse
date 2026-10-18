@@ -50,6 +50,8 @@ class Paths:
         self.editions = self.data / "editions.json"
         self.feedback = self.data / "feedback.json"
         self.demos = self.root / "demos"
+        self.work = self.root / "work"
+        self.server = self.work / "server.json"  # the ports the running servers use (see ports.py)
         self.web = self.root / "web"
         self.examples = self.root / "examples"
         self.sample_editions = self.examples / "sample-editions.json"
@@ -121,7 +123,8 @@ def load_config(paths=None):
 
 
 def demo_port_for(config, port=None):
-    """Demos get their own origin: the configured demo_port, or the page port + 1."""
+    """Demos get their own origin: the configured demo_port, or the page port + 1. The running ports may differ
+    when these are busy; ports.running() has those."""
     port = port or config["port"]
     configured = config.get("demo_port")
     return configured if configured and configured != port else port + 1

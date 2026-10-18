@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Ports: a busy default no longer stops `./run.sh`; it moves to the next free pair and prints the address. A port
+  set in `repomuse.json` or with `--port` is used exactly, or the server stops and says it is busy. The ports in
+  use are recorded in `work/server.json`; `repomuse status` shows them and `cover` reads them. Running
+  `./run.sh` again for the same checkout points to the server already running. The example config no longer sets
+  `port`, and the READMEs no longer name one.
 - Interaction fixes: filter, search, sort and edition changes show the start of the results; a pick you just rated stays listed until the filters change, so
   the "Not for me" panel opens even under "Not rated" or "Useful"; keyboard focus stays on the filter you pressed.
 - "Not for me" opens a panel to say why: five fixed reasons the agent acts on (`off-topic`, `too-heavy`,

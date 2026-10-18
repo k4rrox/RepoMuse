@@ -17,7 +17,8 @@ Read the whole skill file before starting. Field reference: `docs/edition-format
 ## Commands (Python 3.9+, standard library only, run from the repo root)
 
 ```sh
-./run.sh                                     # local page on http://127.0.0.1:53265/
+./run.sh                                     # local page; prints its address
+python3 -m repomuse status [--json]          # where the page and demos are running (work/server.json)
 python3 -m repomuse init                     # create repomuse.json and profile.md
 python3 -m repomuse check                    # validate settings, editions, feedback
 python3 -m repomuse feedback --json          # the user's likes and dislikes

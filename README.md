@@ -41,7 +41,7 @@ git clone https://github.com/k4rrox/RepoMuse && cd RepoMuse
 ./run.sh
 ```
 
-Open http://127.0.0.1:53265/. You will see labelled **sample picks** and one sample demo (demos run on port 53266).
+Open the address it prints. You will see labelled **sample picks** and one sample demo.
 Needs Python 3.9+ (already on macOS and most Linux). On Windows run `python -m repomuse serve`; optionally
 `pip install tzdata` so the chat digest can convert times to your timezone (the page always can).
 
@@ -129,7 +129,7 @@ All personal state lives in the checkout and is **gitignored**, so `git pull` up
 | File | Written by | Holds |
 | --- | --- | --- |
 | `profile.md` | you and the agent | what to watch, what to skip, what the agent has noticed |
-| `repomuse.json` | setup | title, mode (`ui` / `no-ui`), language, timezone, cadence, picks per run, topics, port, demo settings |
+| `repomuse.json` | setup | title, mode (`ui` / `no-ui`), language, timezone, cadence, picks per run, topics, ports (optional), demo settings |
 | `data/editions.json` | `publish` | every edition |
 | `data/feedback.json` | the page or `vote` | your likes and dislikes |
 | `demos/<slug>/` | the agent | demos it built |
@@ -139,6 +139,7 @@ All personal state lives in the checkout and is **gitignored**, so `git pull` up
 
 ```bash
 python3 -m repomuse serve [--port N]                  # same as ./run.sh
+python3 -m repomuse status [--json]                   # where the page and demos are running
 python3 -m repomuse init                              # create repomuse.json and profile.md
 python3 -m repomuse check                             # validate settings, data and translations
 python3 -m repomuse publish FILE [--check] [--replace]
@@ -157,7 +158,7 @@ python3 -m repomuse migrate OLD.json                  # upgrade from Open Source
 ## Safety model
 
 - The server binds to `127.0.0.1`, accepts only local `Host` headers and serves a strict Content Security Policy.
-- Demos run on their own origin (the page port + 1) under `sandbox allow-scripts allow-same-origin` and
+- Demos run on their own origin (a port of their own) under `sandbox allow-scripts allow-same-origin` and
   `connect-src 'none'`: they cannot read the page's data or call its API, cannot reach the network, and cannot
   submit forms or open popups. Only preview assets are served; `source/`, `src/`, `node_modules/`, READMEs and
   configs never are. (A separate origin is used instead of an opaque-origin sandbox because some embedded

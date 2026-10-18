@@ -39,7 +39,7 @@ git clone https://github.com/k4rrox/RepoMuse && cd RepoMuse
 ./run.sh
 ```
 
-打开 http://127.0.0.1:53265/ ，你会看到带有标注的**示例精选**和一个示例 Demo（Demo 运行在 53266 端口）。
+打开它打印出的地址，你会看到带有标注的**示例精选**和一个示例 Demo。
 需要 Python 3.9+（macOS 和大多数 Linux 已自带）。在 Windows 上请运行 `python -m repomuse serve`；可选执行
 `pip install tzdata`，让对话摘要也能把时间转换到你的时区（网页始终可以）。
 
@@ -126,7 +126,7 @@ profile.md + 反馈 ──▶ Agent 运行 repomuse-run ──▶ 发布（校�
 | 文件 | 由谁写入 | 内容 |
 | --- | --- | --- |
 | `profile.md` | 你和 Agent | 关注什么、不想看什么、Agent 观察到的偏好 |
-| `repomuse.json` | 初始化 | 标题、模式（`ui` / `no-ui`）、语言、时区、周期、每期数量、方向、端口、Demo 设置 |
+| `repomuse.json` | 初始化 | 标题、模式（`ui` / `no-ui`）、语言、时区、周期、每期数量、方向、端口（可选）、Demo 设置 |
 | `data/editions.json` | `publish` | 所有精选期数 |
 | `data/feedback.json` | 网页或 `vote` | 你的"有用 / 不想看" |
 | `demos/<slug>/` | Agent | 它做好的 Demo |
@@ -136,6 +136,7 @@ profile.md + 反馈 ──▶ Agent 运行 repomuse-run ──▶ 发布（校�
 
 ```bash
 python3 -m repomuse serve [--port N]                  # 等同于 ./run.sh
+python3 -m repomuse status [--json]                   # 页面和 Demo 运行在哪里
 python3 -m repomuse init                              # 创建 repomuse.json 和 profile.md
 python3 -m repomuse check                             # 校验配置、数据和翻译
 python3 -m repomuse publish FILE [--check] [--replace]
@@ -154,7 +155,7 @@ python3 -m repomuse migrate OLD.json                  # 从 Open Source Radar �
 ## 安全模型
 
 - 服务只绑定 `127.0.0.1`，只接受本机的 `Host` 请求头，并使用严格的内容安全策略（CSP）。
-- Demo 运行在独立的来源上（页面端口 + 1），并设置 `sandbox allow-scripts allow-same-origin` 和 `connect-src 'none'`：
+- Demo 运行在独立的来源上（单独的端口），并设置 `sandbox allow-scripts allow-same-origin` 和 `connect-src 'none'`：
   它们读不到页面数据、调用不了页面接口、无法联网，也不能提交表单或打开弹窗。服务只提供预览资源，
   `source/`、`src/`、`node_modules/`、README 和配置文件一律不会对外提供。（之所以用独立来源，而不是无来源的沙箱，
   是因为部分内嵌浏览器会拒绝加载无来源页面的任何子资源。）

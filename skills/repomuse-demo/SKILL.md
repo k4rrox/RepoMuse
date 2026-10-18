@@ -51,7 +51,7 @@ Every scope keeps the limits below: no long-running services, paid APIs, credent
 
 ## 3. Fit the sandbox
 
-Demos are served from their own port (the page port + 1, for example 53266) with `sandbox allow-scripts
+Demos are served from their own port (`demo_port` in `python3 -m repomuse status --json`) with `sandbox allow-scripts
 allow-same-origin` and `connect-src 'none'`, so they cannot reach the page, its data or the network:
 
 - Ship a static `index.html` with local JS, CSS and images. No CDNs, no inline `<script>`, no network
@@ -67,7 +67,8 @@ allow-same-origin` and `connect-src 'none'`, so they cannot reach the page, its 
 
 ## 4. Verify like a reviewer
 
-Open `http://127.0.0.1:<port + 1>/demos/<slug>/` in a browser (the page's "Open demo" link goes there) and:
+Open `<demo_url>demos/<slug>/` from `python3 -m repomuse status --json` in a browser (the page's "Open demo" link
+goes there) and:
 
 - Use every key interaction and check the result is what upstream would produce.
 - Check a narrow (phone) width, a failure or empty path, and the console (no errors).

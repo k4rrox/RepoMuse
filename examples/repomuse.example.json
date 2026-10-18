@@ -5,7 +5,6 @@
   "timezone": "UTC",
   "cadence": "daily at 09:00",
   "picks_per_run": { "min": 0, "max": 3 },
-  "port": 53265,
   "demos": { "policy": "ask", "scope": "medium", "allow_installs": true, "max_per_run": 1 },
   "topics": [
     { "id": "ai", "label": "AI" }

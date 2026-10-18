@@ -1,19 +1,22 @@
-"""Local preview: the picks page, its JSON and feedback write-back on one port, sandboxed demos on the next.
+"""Local preview: the picks page, its JSON and feedback write-back on one port, sandboxed demos on another.
 
-Both bind to 127.0.0.1 only. Demos run on their own origin (port + 1), so they can never read the page's storage
-or call its API, without the opaque-origin sandbox that some browsers refuse to load subresources for.
+Both bind to 127.0.0.1 only. Demos run on their own origin (by default the page port + 1), so they can never read
+the page's storage or call its API, without the opaque-origin sandbox that some browsers refuse to load
+subresources for. Which ports are used, and where they are recorded, is in ports.py.
 """
 import datetime as dt
 import html
 import json
 import re
+import signal
 import threading
 import webbrowser
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from http.server import BaseHTTPRequestHandler
 from urllib.parse import unquote, urlsplit
 
 from . import config as config_module
-from .config import Paths, demo_port_for, load_config, load_strings
+from .config import Paths, load_config, load_strings
+from .ports import INSTANCE_HEADER, forget, open_demos, open_pair, record, running, set_by_user
 from .store import load_editions, load_feedback, set_vote
 
 ROOT = config_module.ROOT
@@ -83,6 +86,11 @@ def public_config(paths, demo_port):
 
 class Handler(BaseHTTPRequestHandler):
     server_version = "RepoMuse"
+
+    def end_headers(self):
+        # Tells `repomuse status` this checkout's running server apart from anything else on the port.
+        self.send_header(INSTANCE_HEADER, getattr(self.server, "instance", ""))
+        super().end_headers()
 
     def respond(self, code, body, content_type="application/json; charset=utf-8", head=False, demo=False):
         if not isinstance(body, bytes):
@@ -271,58 +279,74 @@ class DemoHandler(Handler):
         self.respond(405, {"error": "Demos are read-only"})
 
 
-def run_demos(port=None, slug=None, open_browser=True):
-    """No-UI mode: only the demo origin, until Ctrl-C. `slug` opens that demo; otherwise the demo list."""
-    paths = Paths(ROOT)
+def settings(paths):
     try:
-        config = load_config(paths)
+        return load_config(paths), set_by_user(paths)
     except (OSError, ValueError) as error:
         raise SystemExit(f"repomuse.json is not valid: {error}")
-    demo_port = demo_port_for(config, port)
-    if slug and not (paths.demos / slug / "index.html").is_file():
-        raise SystemExit(f"demos/{slug}/index.html does not exist")
+
+
+def stop(signum, frame):
+    raise KeyboardInterrupt
+
+
+def serve_until_stopped(paths, servers, info):
+    # Agents usually stop a background server with SIGTERM; clean up the record for that too, not only for Ctrl-C.
+    signal.signal(signal.SIGTERM, stop)
+    for server in servers:
+        server.instance = info["instance"]
+    for server in servers[1:]:
+        threading.Thread(target=server.serve_forever, daemon=True).start()
     try:
-        demos = ThreadingHTTPServer(("127.0.0.1", demo_port), DemoHandler)
-    except OSError as error:
-        raise SystemExit(f"Could not start on port {demo_port}: {error}. Is ./run.sh already serving demos there?")
-    demos.main_port = None
-    url = f"http://127.0.0.1:{demo_port}/" + (f"demos/{slug}/" if slug else "")
-    print(f"RepoMuse demos · {url}  (Ctrl-C to stop)", flush=True)
-    if open_browser:
-        webbrowser.open(url)
-    try:
-        demos.serve_forever()
+        servers[0].serve_forever()
     except KeyboardInterrupt:
         pass
     finally:
-        demos.server_close()
+        for server in servers[1:]:
+            server.shutdown()
+        for server in servers:
+            server.server_close()
+        forget(paths, info)
+
+
+def moved_from(wanted, used):
+    return f"  Port {wanted} was busy, so this run uses {used}." if wanted != used else ""
+
+
+def run_demos(port=None, slug=None, open_browser=True):
+    """No-UI mode: only the demo origin, until Ctrl-C. `slug` opens that demo; otherwise the demo list."""
+    paths = Paths(ROOT)
+    config, user_keys = settings(paths)
+    if slug and not (paths.demos / slug / "index.html").is_file():
+        raise SystemExit(f"demos/{slug}/index.html does not exist")
+    page = f"demos/{slug}/" if slug else ""
+    current = running(paths)
+    if current and port is None:
+        url = current["demo_url"] + page
+        print(f"RepoMuse demos are already running · {url}", flush=True)
+        if open_browser:
+            webbrowser.open(url)
+        return
+    demos = open_demos(config, user_keys, port, DemoHandler)
+    demos.main_port = None
+    info = record(paths, None, demos.server_port)
+    url = info["demo_url"] + page
+    print(f"RepoMuse demos · {url}  (Ctrl-C to stop)", flush=True)
+    if open_browser:
+        webbrowser.open(url)
+    serve_until_stopped(paths, [demos], info)
 
 
 def run(port=None):
     paths = Paths(ROOT)
-    try:
-        config = load_config(paths)
-    except (OSError, ValueError) as error:
-        raise SystemExit(f"repomuse.json is not valid: {error}")
-    port = port or config["port"]
-    demo_port = demo_port_for(config, port)
-    servers = []
-    for number, handler in ((port, Handler), (demo_port, DemoHandler)):
-        try:
-            servers.append(ThreadingHTTPServer(("127.0.0.1", number), handler))
-        except OSError as error:
-            for started in servers:
-                started.server_close()
-            raise SystemExit(f"Could not start on port {number}: {error}. Try ./run.sh {port + 2}")
-    main, demos = servers
-    main.demo_port, demos.main_port = demo_port, port
-    threading.Thread(target=demos.serve_forever, daemon=True).start()
-    print(f"RepoMuse · http://127.0.0.1:{port}/  (demos on port {demo_port})", flush=True)
-    try:
-        main.serve_forever()
-    except KeyboardInterrupt:
-        pass
-    finally:
-        demos.shutdown()
-        for server in servers:
-            server.server_close()
+    config, user_keys = settings(paths)
+    current = running(paths)
+    if current and current["url"] and port in (None, current["port"]):
+        print(f"RepoMuse is already running · {current['url']}  (demos on port {current['demo_port']})", flush=True)
+        return
+    main, demos = open_pair(config, user_keys, port, Handler, DemoHandler)
+    main.demo_port, demos.main_port = demos.server_port, main.server_port
+    info = record(paths, main.server_port, demos.server_port)
+    print(f"RepoMuse · {info['url']}  (demos on port {info['demo_port']})"
+          + moved_from(port or config["port"], main.server_port), flush=True)
+    serve_until_stopped(paths, [main, demos], info)
