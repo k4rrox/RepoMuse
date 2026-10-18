@@ -17,7 +17,7 @@ Thanks for helping. RepoMuse stays small on purpose, so a few ground rules:
   | --- | --- | --- |
   | logic | `strings.js`, `state.js`, `format.js` | no DOM; tested directly in Node |
   | I/O | `api.js`, `storage.js` | talk to the server or the browser, nothing else |
-  | widgets | `dom.js`, `parts.js`, `demos.js`, `feedback.js`, `cards.js` | build elements from data; never read the URL |
+  | widgets | `dom.js`, `parts.js`, `demos.js`, `reasons.js`, `feedback.js`, `cards.js` | build elements from data; never read the URL |
   | page | `render.js`, `main.js` | the only modules that draw the whole page or wire events |
 
   A widget that needs to redraw gets a `rerender` callback instead of importing `render.js`.

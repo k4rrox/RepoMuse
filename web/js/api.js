@@ -17,11 +17,15 @@ export async function getJson(url) {
   return response.json();
 }
 
-export async function sendVote(repo, selected) {
+// `extra` is { reasons, note } for a "not for me"; reasons are codes from reasons.js.
+export async function sendVote(repo, selected, extra = {}) {
+  const body = { repo, vote: selected || null };
+  if (selected === 'dislike' && extra.reasons?.length) body.reasons = extra.reasons;
+  if (selected === 'dislike' && extra.note) body.note = extra.note;
   const response = await fetch('/api/feedback', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ repo, vote: selected || null }),
+    body: JSON.stringify(body),
   });
   if (!response.ok) throw new Error(String(response.status));
 }

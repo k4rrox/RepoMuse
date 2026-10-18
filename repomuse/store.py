@@ -7,7 +7,7 @@ import threading
 from pathlib import Path
 
 from .config import Paths, load_config, topic_ids
-from .schema import (SCHEMA_VERSION, check_demo_fields, not_in_future, repo_name, require, text, validate_data, validate_demo,
+from .schema import (SCHEMA_VERSION, check_demo_fields, reasons_list, not_in_future, repo_name, require, text, validate_data, validate_demo,
                      validate_edition, validate_feedback, validate_publication)
 
 LOCK = threading.Lock()
@@ -153,12 +153,13 @@ def load_feedback(paths=None):
     return validate_feedback(read_json(paths.feedback))
 
 
-def set_vote(repo, vote, note=None, paths=None):
+def set_vote(repo, vote, note=None, paths=None, reasons=None):
     paths = paths or Paths()
     repo_name(repo, "repo")
     require(vote in {"like", "dislike", None}, "vote must be like, dislike or null")
     if note is not None:
         text(note, "note", 500)
+    reasons_list(reasons, vote, "vote")
     with LOCK:
         data = load_feedback(paths)
         key = repo.lower()
@@ -168,6 +169,8 @@ def set_vote(repo, vote, note=None, paths=None):
             entry = {"vote": vote, "at": now_iso()}
             if note:
                 entry["note"] = note
+            if reasons:
+                entry["reasons"] = reasons
             data["votes"][key] = entry
         write_json(paths.feedback, validate_feedback(data))
         return data

@@ -7,6 +7,7 @@ from pathlib import Path
 
 from . import __version__
 from .config import Paths, demo_port_for, load_config, load_strings
+from .schema import DISLIKE_REASONS
 from .store import attach_demo, load_editions, load_feedback, own_editions, publish, set_vote, write_json
 
 
@@ -103,7 +104,8 @@ def cmd_feedback(args, paths):
     rows = []
     for repo, entry in sorted(votes.items(), key=lambda item: item[1]["at"], reverse=True):
         project = picks.get(repo, {})
-        rows.append({"repo": repo, "vote": entry["vote"], "at": entry["at"], "note": entry.get("note"),
+        rows.append({"repo": repo, "vote": entry["vote"], "at": entry["at"], "reasons": entry.get("reasons", []),
+                     "note": entry.get("note"),
                      "topic": project.get("topic"), "title": project.get("title"), "day": project.get("day"),
                      "tags": project.get("tags", []), "effort": project.get("effort")})
     if args.json:
@@ -112,8 +114,8 @@ def cmd_feedback(args, paths):
     if not rows:
         print("No feedback yet.")
     for row in rows:
-        print(f"{row['vote']:8} {row['repo']:40} {row['topic'] or '-':12} {row['title'] or ''}"
-              + (f"  — {row['note']}" if row["note"] else ""))
+        why = ", ".join(row["reasons"] + ([row["note"]] if row["note"] else []))
+        print(f"{row['vote']:8} {row['repo']:40} {row['topic'] or '-':12} {row['title'] or ''}" + (f"  — {why}" if why else ""))
 
 
 def cmd_seen(args, paths):
@@ -153,9 +155,11 @@ def cmd_vote(args, paths):
     if not paths.editions.exists():
         raise ValueError("these are the bundled sample picks; publish your first edition before voting")
     vote = None if args.vote == "clear" else args.vote
-    set_vote(args.repo, vote, args.note, paths)
+    reasons = args.reason or None
+    set_vote(args.repo, vote, args.note, paths, reasons)
     known = args.repo.lower() in picks_index(paths)
-    print(f"{'Cleared' if vote is None else 'Saved'} {args.repo}" + ("" if vote is None else f": {vote}")
+    detail = "" if vote is None else f": {vote}" + (f" ({', '.join(reasons)})" if reasons else "")
+    print(f"{'Cleared' if vote is None else 'Saved'} {args.repo}{detail}"
           + ("" if known else " (note: this repo is not in any published edition)"))
 
 
@@ -201,7 +205,9 @@ def main(argv=None):
     vote = commands.add_parser("vote", help="record feedback from the chat: like, dislike or clear")
     vote.add_argument("repo", help="owner/repo")
     vote.add_argument("vote", choices=("like", "dislike", "clear"))
-    vote.add_argument("--note", help="optional reason, kept with the vote")
+    vote.add_argument("--reason", action="append", choices=DISLIKE_REASONS,
+                      help="why it is not for me (dislike only; repeat for several)")
+    vote.add_argument("--note", help="optional reason in the user's words, kept with the vote")
     dem = commands.add_parser("demo", help="serve demos only and open one in the browser (no-UI mode)")
     dem.add_argument("slug", nargs="?", help="demo folder name; omit for the list of demos")
     dem.add_argument("--port", type=int, help="the page port; demos use the port after it")

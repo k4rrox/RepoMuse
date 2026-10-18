@@ -213,6 +213,15 @@ class ApiTests(ServerTestCase):
         self.assertEqual(self.post_vote({"repo": "owner/repo", "vote": None})[0], 200)
         self.assertEqual(json.loads(self.request("/api/feedback")[2])["votes"], {})
 
+    def test_feedback_with_reasons_from_the_page(self):
+        publish(edition("2026-10-15", []), self.checkout.paths)
+        code, _, body = self.post_vote({"repo": "a/b", "vote": "dislike", "reasons": ["off-topic"], "note": "not my stack"})
+        self.assertEqual(code, 200, body)
+        entry = json.loads(self.request("/api/feedback")[2])["votes"]["a/b"]
+        self.assertEqual((entry["reasons"], entry["note"]), (["off-topic"], "not my stack"))
+        self.assertEqual(self.post_vote({"repo": "a/b", "vote": "dislike", "reasons": ["made-up"]})[0], 400)
+        self.assertEqual(self.post_vote({"repo": "a/b", "vote": "dislike", "note": ""})[0], 200)  # empty "Other" is fine
+
     def test_cross_site_and_malformed_feedback_is_rejected(self):
         publish(edition("2026-10-15", []), self.checkout.paths)
         vote = {"repo": "a/b", "vote": "like"}

@@ -146,7 +146,7 @@ python3 -m repomuse attach-demo OWNER/REPO FILE [--check]
 python3 -m repomuse feedback [--json]                 # likes and dislikes, joined with their picks
 python3 -m repomuse seen [--json]                     # every repo already picked
 python3 -m repomuse digest [--day D] [--out F]        # no-ui: an edition as Markdown for the chat
-python3 -m repomuse vote OWNER/REPO like|dislike|clear [--note TEXT]
+python3 -m repomuse vote OWNER/REPO like|dislike|clear [--reason R] [--note TEXT]
 python3 -m repomuse demo [SLUG] [--no-open]           # no-ui: serve demos only and open one
 python3 -m repomuse cover SLUG [--offset PX]          # demo thumbnail via headless Chrome/Chromium/Edge
 python3 -m repomuse migrate OLD.json                  # upgrade from Open Source Radar

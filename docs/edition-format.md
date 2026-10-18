@@ -83,8 +83,15 @@ generator scripts or a runtime library. `demo.tech_stack` lists only what the de
 The page writes likes and dislikes to `data/feedback.json`:
 
 ```json
-{ "schema_version": 1, "votes": { "owner/repo": { "vote": "like", "at": "2026-10-17T21:04:11+08:00" } } }
+{ "schema_version": 1, "votes": {
+  "owner/repo": { "vote": "like", "at": "2026-10-17T21:04:11+08:00" },
+  "owner/other": { "vote": "dislike", "at": "2026-10-17T21:05:02+08:00",
+                   "reasons": ["too-heavy", "too-early"], "note": "needs a GPU" }
+} }
 ```
+
+`reasons` is only for a dislike, and each value is one of `off-topic`, `too-heavy`, `already-known`, `too-early`
+or `inaccurate` (the run skill says how the agent uses each). `note` holds the user's own words, up to 500 characters.
 
 Read it with `python3 -m repomuse feedback --json`, which joins each vote with the pick it refers to.
 

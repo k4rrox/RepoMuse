@@ -8,7 +8,8 @@ const EFFORT_ORDER = { low: 0, medium: 1, high: 2 };
 export const state = {
   config: { title: 'RepoMuse', language: 'en', timezone: 'UTC', topics: [], sample: true },
   data: null,
-  votes: {},
+  votes: {},  // repo -> 'like' | 'dislike'
+  reasons: {},  // repo -> { reasons: [codes], note } for a dislike
   // Filters, mirrored in the URL so a view can be shared or reloaded.
   view: 'daily', day: null, topic: 'all', verdict: 'all', feedback: 'all', query: '', sort: 'editorial',
 };

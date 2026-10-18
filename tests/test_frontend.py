@@ -116,7 +116,7 @@ assert.equal(demoUrl('/demos/a/'), 'http://127.0.0.1:60000/demos/a/');
     def test_module_layers_only_depend_downward(self):
         # Mirrors the table in CONTRIBUTING.md: logic < I/O < widgets < page.
         layers = {"strings": 0, "state": 0, "format": 0, "api": 1, "storage": 1,
-                  "dom": 2, "parts": 2, "demos": 2, "feedback": 2, "cards": 2, "render": 3, "main": 3}
+                  "dom": 2, "parts": 2, "demos": 2, "reasons": 2, "feedback": 2, "cards": 2, "render": 3, "main": 3}
         modules = {path.stem for path in JS.glob("*.js")}
         self.assertEqual(modules, set(layers), "add new modules to the layer table here and in CONTRIBUTING.md")
         for name in sorted(modules):
@@ -127,6 +127,17 @@ assert.equal(demoUrl('/demos/a/'), 'http://127.0.0.1:60000/demos/a/');
                     self.assertFalse(layers[name] == 2 and target == "render", "widgets get a rerender callback")
             if layers[name] == 0:
                 self.assertNotIn("document.", (JS / f"{name}.js").read_text(encoding="utf-8"), f"{name}.js must not touch the DOM")
+
+    def test_dislike_reasons_match_the_server_and_have_labels(self):
+        from repomuse.schema import DISLIKE_REASONS
+        self.run_node("""
+const { DISLIKE_REASONS } = await load('reasons');
+assert.deepEqual(DISLIKE_REASONS, %s);
+const keys = [...DISLIKE_REASONS.map(code => 'reason.' + code), 'reason.other', 'reasons.title', 'reasons.hint',
+  'reasons.placeholder', 'reasons.other', 'reasons.save', 'reasons.skip', 'reasons.undo', 'reasons.saved'];
+assert.deepEqual(keys.filter(key => !(key in STRINGS)), []);
+assert.equal(t('reasons.hint', { name: 'X' }).includes('X'), true);
+""" % json.dumps(list(DISLIKE_REASONS)))
 
     def test_every_static_text_key_exists_in_strings(self):
         html = (WEB / "index.html").read_text(encoding="utf-8")

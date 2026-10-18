@@ -87,6 +87,18 @@ was written. If the page is running, confirm `/api/editions` shows the new picks
 
 ## 7. Learn, visibly
 
+A "not for me" can carry `reasons` (and free text in `note`). Act on each the way it was meant:
+
+| Reason | What to do next time |
+| --- | --- |
+| `off-topic` | weigh that topic and those tags down |
+| `too-heavy` | rank `effort: high` picks (GPU, paid services, complex setup) lower |
+| `already-known` | not a dislike: never re-pick that repo, but keep picking its topic as before |
+| `too-early` | prefer projects with a release, real users or a working demo |
+| `inaccurate` | your write-up was wrong: verify harder; this says nothing about the topic |
+
+A dislike without reasons is a weak signal; do not read a topic preference into a single one.
+
 If feedback shows a clear pattern (three or more consistent signals), add one short line with the evidence under
 `## What the agent has noticed` in `profile.md`, for example
 "Marked 3 GPU-only projects as not for me; I now rank `effort: high` picks lower."
@@ -105,12 +117,13 @@ Never edit the user's own sections without asking.
 
 ## 9. Feedback in the chat
 
-In either mode the user may answer in the chat ("1 useful, 3 not for me", "skip the GPU one"). Map each number
-to the repo at that position in the digest or report you just sent, confirm anything ambiguous, then record it:
+In either mode the user may answer in the chat ("1 useful, 3 not for me: too heavy", "skip the GPU one"). Map each
+number to the repo at that position in the digest or report you just sent, map their words to the reason codes
+above (keep anything that does not fit as `--note`), confirm anything ambiguous, then record it:
 
 ```sh
 python3 -m repomuse vote owner/repo like --note "short reason in their words"
-python3 -m repomuse vote owner/repo dislike
+python3 -m repomuse vote owner/repo dislike --reason too-heavy --reason too-early --note "needs a GPU"
 python3 -m repomuse vote owner/repo clear
 ```
 

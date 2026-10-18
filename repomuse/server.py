@@ -198,7 +198,7 @@ class Handler(BaseHTTPRequestHandler):
             body = json.loads(self.rfile.read(length).decode("utf-8"))
             if not isinstance(body, dict):
                 raise ValueError("body must be an object")
-            data = set_vote(body.get("repo"), body.get("vote"), body.get("note"), paths)
+            data = set_vote(body.get("repo"), body.get("vote"), body.get("note") or None, paths, body.get("reasons"))
         except (ValueError, TypeError, UnicodeDecodeError) as error:
             self.respond(400, {"error": str(error)})
             return

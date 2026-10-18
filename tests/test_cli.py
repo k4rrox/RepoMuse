@@ -96,6 +96,13 @@ class CliTests(unittest.TestCase):
         self.assertEqual(out_file.read_text(encoding="utf-8"), out)
         self.assertIn("Saved a/one: like", self.run_cli("vote", "a/one", "like", "--note", "my stack")[1])
         self.assertIn("not in any published edition", self.run_cli("vote", "b/other", "dislike")[1])
+        out = self.run_cli("vote", "b/other", "dislike", "--reason", "too-heavy", "--reason", "already-known")[1]
+        self.assertIn("(too-heavy, already-known)", out)
+        rows = {row["repo"]: row for row in json.loads(self.run_cli("feedback", "--json")[1])}
+        self.assertEqual(rows["b/other"]["reasons"], ["too-heavy", "already-known"])
+        self.assertIn("too-heavy, already-known", self.run_cli("feedback")[1])
+        with self.assertRaises(SystemExit):  # argparse rejects unknown reason codes
+            self.run_cli("vote", "b/other", "dislike", "--reason", "boring")
         rows = {row["repo"]: row for row in json.loads(self.run_cli("feedback", "--json")[1])}
         self.assertEqual((rows["a/one"]["vote"], rows["a/one"]["note"]), ("like", "my stack"))
         self.assertEqual(self.run_cli("vote", "a/one", "clear")[0], 0)

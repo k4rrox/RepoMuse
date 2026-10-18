@@ -91,7 +91,13 @@ class FileTests(unittest.TestCase):
     def test_feedback_file_rules(self):
         good = {"schema_version": 1, "votes": {"a/b": {"vote": "like", "at": "2026-10-17T09:00:00+08:00"}}}
         validate_feedback(good)
-        for votes in ({"A/b": {"vote": "like", "at": "2026-10-17T09:00:00+08:00"}},
+        validate_feedback({"schema_version": 1, "votes": {"a/b": {"vote": "dislike", "at": "2026-10-17T09:00:00+08:00",
+                                                                   "reasons": ["too-heavy", "already-known"], "note": "GPU"}}})
+        for votes in ({"a/b": {"vote": "like", "at": "2026-10-17T09:00:00+08:00", "reasons": ["too-heavy"]}},
+                      {"a/b": {"vote": "dislike", "at": "2026-10-17T09:00:00+08:00", "reasons": ["boring"]}},
+                      {"a/b": {"vote": "dislike", "at": "2026-10-17T09:00:00+08:00", "reasons": ["too-early", "too-early"]}},
+                      {"a/b": {"vote": "dislike", "at": "2026-10-17T09:00:00+08:00", "reasons": "too-early"}},
+                      {"A/b": {"vote": "like", "at": "2026-10-17T09:00:00+08:00"}},
                       {"a/b": {"vote": "love", "at": "2026-10-17T09:00:00+08:00"}},
                       {"a/b": {"vote": "like", "at": "yesterday"}}, {"not-a-repo": {"vote": "like", "at": "2026-10-17T09:00:00Z"}}):
             with self.subTest(votes=votes), self.assertRaises(ValueError):

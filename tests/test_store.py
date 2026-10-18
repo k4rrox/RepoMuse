@@ -182,6 +182,16 @@ class FeedbackTests(StoreTestCase):
         set_vote("owner/repo", None, paths=self.paths)
         self.assertEqual(load_feedback(self.paths)["votes"], {})
 
+    def test_dislike_reasons_are_saved_and_cleared_with_the_vote(self):
+        set_vote("a/b", "dislike", "needs a GPU", self.paths, ["too-heavy", "too-early"])
+        entry = load_feedback(self.paths)["votes"]["a/b"]
+        self.assertEqual((entry["reasons"], entry["note"]), (["too-heavy", "too-early"], "needs a GPU"))
+        set_vote("a/b", "like", paths=self.paths)
+        self.assertNotIn("reasons", load_feedback(self.paths)["votes"]["a/b"])
+        for vote, reasons in (("like", ["too-heavy"]), ("dislike", ["nope"])):
+            with self.subTest(vote=vote), self.assertRaises(ValueError):
+                set_vote("a/b", vote, paths=self.paths, reasons=reasons)
+
     def test_bad_votes_are_rejected(self):
         for repo, value in (("not a repo", "like"), ("a/b", "love")):
             with self.subTest(repo=repo), self.assertRaises(ValueError):

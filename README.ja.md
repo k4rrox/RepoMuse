@@ -146,7 +146,7 @@ python3 -m repomuse attach-demo OWNER/REPO FILE [--check]
 python3 -m repomuse feedback [--json]                 # フィードバックと対応するピックを一覧表示
 python3 -m repomuse seen [--json]                     # これまでに選んだリポジトリを一覧表示
 python3 -m repomuse digest [--day D] [--out F]        # no-ui：1 回分をチャット用の Markdown で出力
-python3 -m repomuse vote OWNER/REPO like|dislike|clear [--note TEXT]
+python3 -m repomuse vote OWNER/REPO like|dislike|clear [--reason R] [--note TEXT]
 python3 -m repomuse demo [SLUG] [--no-open]           # no-ui：デモだけを配信して開く
 python3 -m repomuse cover SLUG [--offset PX]          # ヘッドレス Chrome/Chromium/Edge でデモのサムネイルを作成
 python3 -m repomuse migrate OLD.json                  # Open Source Radar からデータを移行

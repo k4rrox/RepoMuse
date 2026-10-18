@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- "Not for me" opens a panel to say why: five fixed reasons the agent acts on (`off-topic`, `too-heavy`,
+  `already-known`, `too-early`, `inaccurate`) plus "Other" with free text. The vote is saved at once; reasons are
+  optional. `vote --reason`, `feedback --json` and the run skill use them.
 - `demos` settings in `repomuse.json`: `policy` (auto / ask / off), `scope` (small / medium / large),
   `allow_installs` and `max_per_run`. `attach-demo` enforces policy, the per-edition limit and installs; the skills
   follow scope. The profile's free-text "Demos" note is replaced by these settings.

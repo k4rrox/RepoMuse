@@ -143,7 +143,7 @@ python3 -m repomuse attach-demo OWNER/REPO FILE [--check]
 python3 -m repomuse feedback [--json]                 # 列出反馈及对应的精选
 python3 -m repomuse seen [--json]                     # 列出所有已推荐过的仓库
 python3 -m repomuse digest [--day D] [--out F]        # no-ui：把一期精选输出为对话用的 Markdown
-python3 -m repomuse vote OWNER/REPO like|dislike|clear [--note TEXT]
+python3 -m repomuse vote OWNER/REPO like|dislike|clear [--reason R] [--note TEXT]
 python3 -m repomuse demo [SLUG] [--no-open]           # no-ui：只启动 Demo 服务并打开
 python3 -m repomuse cover SLUG [--offset PX]          # 用无头 Chrome/Chromium/Edge 生成 Demo 封面
 python3 -m repomuse migrate OLD.json                  # 从 Open Source Radar 升级数据

@@ -260,6 +260,19 @@ def validate_data(data):
     return data
 
 
+# Why a pick was "not for me". Each maps to something the agent can act on (see the run skill); free text goes in note.
+DISLIKE_REASONS = ("off-topic", "too-heavy", "already-known", "too-early", "inaccurate")
+
+
+def reasons_list(reasons, vote, label):
+    if reasons is None:
+        return
+    require(isinstance(reasons, list) and len(set(reasons)) == len(reasons) and
+            all(reason in DISLIKE_REASONS for reason in reasons),
+            f"{label}.reasons must be distinct values from {', '.join(DISLIKE_REASONS)}")
+    require(not reasons or vote == "dislike", f"{label}.reasons are only for a dislike")
+
+
 def validate_feedback(data):
     require(isinstance(data, dict) and data.get("schema_version") == 1, "feedback schema_version must be 1")
     votes = data.get("votes")
@@ -271,4 +284,5 @@ def validate_feedback(data):
         timestamp(entry.get("at"), f"{repo}.at")
         if entry.get("note") is not None:
             text(entry["note"], f"{repo}.note", 500)
+        reasons_list(entry.get("reasons"), entry["vote"], repo)
     return data

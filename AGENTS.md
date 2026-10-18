@@ -26,7 +26,7 @@ python3 -m repomuse publish FILE [--check] [--replace]
 python3 -m repomuse attach-demo OWNER/REPO FILE [--check]
 python3 -m repomuse cover SLUG [--offset PX]
 python3 -m repomuse digest [--day D]         # no-ui mode: the edition as Markdown for the chat
-python3 -m repomuse vote OWNER/REPO like|dislike|clear [--note TEXT]
+python3 -m repomuse vote OWNER/REPO like|dislike|clear [--reason R] [--note TEXT]
 python3 -m repomuse demo [SLUG] [--no-open]  # no-ui mode: serve demos only and open one
 ```
 

@@ -20,7 +20,7 @@ DEFAULT_STRINGS = {
     "digest.stars": "{approx}{n} stars ({time})",
     "digest.try": "Try it: `{command}`",
     "digest.sample": "These ship with RepoMuse and were not picked for you.",
-    "digest.reply": "Tell me what you think, for example \"1 useful, 3 not for me\", and I will remember it.",
+    "digest.reply": "Tell me what you think, for example \"1 useful, 3 not for me: too heavy\", and I will remember it.",
 }
 
 
